@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xrns2Midi", "Xrns2Midi\Xrns2Midi.csproj", "{B24C1E4C-5AB4-445B-B5B8-DCFEA1FF55A0}"
+	ProjectSection(ProjectDependencies) = postProject
+		{61C514D6-1D5F-4AA7-BF91-7B11296BD4EA} = {61C514D6-1D5F-4AA7-BF91-7B11296BD4EA}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NRenoiseTools", "NRenoiseTools\NRenoiseTools.csproj", "{61C514D6-1D5F-4AA7-BF91-7B11296BD4EA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XsdRenoiseParser", "XSDRenoiseParser\XsdRenoiseParser.csproj", "{AAAC4169-0825-477E-9909-C997896F7C9A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xrns2Xrni", "Xrns2Xrni\Xrns2Xrni.csproj", "{D4DF62D7-EA60-4408-9F05-41DE1C6F892C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{61C514D6-1D5F-4AA7-BF91-7B11296BD4EA} = {61C514D6-1D5F-4AA7-BF91-7B11296BD4EA}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B24C1E4C-5AB4-445B-B5B8-DCFEA1FF55A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B24C1E4C-5AB4-445B-B5B8-DCFEA1FF55A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B24C1E4C-5AB4-445B-B5B8-DCFEA1FF55A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B24C1E4C-5AB4-445B-B5B8-DCFEA1FF55A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61C514D6-1D5F-4AA7-BF91-7B11296BD4EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61C514D6-1D5F-4AA7-BF91-7B11296BD4EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61C514D6-1D5F-4AA7-BF91-7B11296BD4EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61C514D6-1D5F-4AA7-BF91-7B11296BD4EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AAAC4169-0825-477E-9909-C997896F7C9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAAC4169-0825-477E-9909-C997896F7C9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AAAC4169-0825-477E-9909-C997896F7C9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AAAC4169-0825-477E-9909-C997896F7C9A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4DF62D7-EA60-4408-9F05-41DE1C6F892C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4DF62D7-EA60-4408-9F05-41DE1C6F892C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4DF62D7-EA60-4408-9F05-41DE1C6F892C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4DF62D7-EA60-4408-9F05-41DE1C6F892C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

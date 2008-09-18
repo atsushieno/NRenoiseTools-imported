@@ -1,39 +1,39 @@
 <project name="NRenoiseTools Build" default="rebuild">
-    <property name="configuration" value="release"/>
-    
-    <target name="clean" description="Delete all previously compiled binaries.">
-        <delete>
-            <fileset>
-                <include name="**/Debug/**" />
-                <include name="**/Release/**" />
-				<include name="**/obj/**" />
-                <include name="**/*.suo" />
-                <include name="**/*.user" />
-            </fileset>
-        </delete>
-    </target>
-    
-    <target name="build" description="Build all targets.">
-        <call target="build.NRenoiseTools"/>
-    </target>
-    
-    <target name="rebuild" depends="clean, build" />
+  <property name="configuration" value="release"/>
 
-    <target name="build.NRenoiseTools">
-	    <exec program="msbuild.exe" >
-          <arg value="/t:Build"/>
-		  <arg value="/p:Configuration=Release"/>
-		  <arg value="NRenoiseTools.sln" />
-		</exec>
-		
-		<call target="clean"/>
-		
-		<zip ziplevel="9" zipfile="NRenoiseTools-Bin.zip">
-			<fileset basedir="..">
-				<include name="NRenoiseTools/Bin/**" />
-				<include name="NRenoiseTools/*.txt"/>
-			</fileset>	
-		</zip>	
-    </target>
-    
+  <target name="clean" description="Delete all previously compiled binaries.">
+    <delete>
+      <fileset>
+        <include name="**/Debug/**" />
+        <include name="**/Release/**" />
+        <include name="**/obj/**" />
+        <include name="**/*.suo" />
+        <include name="**/*.user" />
+      </fileset>
+    </delete>
+  </target>
+
+  <target name="build" description="Build all targets.">
+    <call target="build.NRenoiseTools"/>
+  </target>
+
+  <target name="rebuild" depends="clean, build" />
+
+  <target name="build.NRenoiseTools">
+    <call target="clean"/>
+    <exec program="msbuild.exe" >
+      <arg value="/t:Build"/>
+      <arg value="/p:Configuration=Release"/>
+      <arg value="NRenoiseTools.sln" />
+    </exec>
+
+    <call target="clean"/>
+
+    <zip ziplevel="9" zipfile="NRenoiseTools-Bin.zip">
+      <fileset basedir="..">
+        <include name="NRenoiseTools/Bin/**" />
+        <include name="NRenoiseTools/*.txt"/>
+      </fileset>
+    </zip>
+  </target>
 </project>
