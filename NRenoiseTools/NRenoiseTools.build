@@ -35,5 +35,22 @@
         <include name="NRenoiseTools/*.txt"/>
       </fileset>
     </zip>
+    
+    <zip ziplevel="9" zipfile="NRenoiseTools-BinAndSample.zip">
+      <fileset basedir="..">
+        <include name="NRenoiseTools/Bin/**" />
+        <include name="NRenoiseTools/Samples/**" />
+        <include name="NRenoiseTools/*.txt"/>
+      </fileset>
+    </zip>    
+
+    <zip ziplevel="9" zipfile="NRenoiseTools-Schemas.zip">
+      <fileset basedir="..">
+        <include name="NRenoiseTools/Schemas/RenoiseModel**" />
+        <include name="NRenoiseTools/*.txt"/>
+      </fileset>
+    </zip> 
+    
+    <call target="clean"/>    
   </target>
 </project>
