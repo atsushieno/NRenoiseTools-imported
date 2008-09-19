@@ -48,7 +48,10 @@ namespace NRenoiseTools.Xrns2XrniApp
                 for (int i = 0; i < song.Instruments.Length; i++)
                 {
                     Instrument instrument = song.Instruments[i];
-                    string instrumentName = string.Format("{0}-Inst{1:D2} ({2}).xrni", songFileNameWithoutExt, i,
+
+                    string pathOfXrns = Path.GetDirectoryName(xrnsFile);
+                    string instrumentName = string.Format("{0}\\{1}-Inst{2:D2} ({3}).xrni", pathOfXrns,
+                                                          songFileNameWithoutExt, i,
                                                           instrument.Name);
                     Log.WriteLine("\tExtract instrument and save XRNI to <{0}>", instrumentName);
                     instrument.Save(instrumentName);

@@ -27,6 +27,12 @@
       <arg value="NRenoiseTools.sln" />
     </exec>
 
+    <exec program="msbuild.exe" >
+      <arg value="/t:Build"/>
+      <arg value="/p:Configuration=Debug"/>
+      <arg value="Samples/NRenoiseToolsSample.sln" />
+    </exec>
+
     <call target="clean"/>
 
     <zip ziplevel="9" zipfile="NRenoiseTools-Bin.zip">
@@ -36,7 +42,7 @@
       </fileset>
     </zip>
     
-    <zip ziplevel="9" zipfile="NRenoiseTools-BinAndSample.zip">
+    <zip ziplevel="9" zipfile="NRenoiseTools-BinAndSamples.zip">
       <fileset basedir="..">
         <include name="NRenoiseTools/Bin/**" />
         <include name="NRenoiseTools/Samples/**" />

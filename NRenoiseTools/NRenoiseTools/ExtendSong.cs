@@ -69,7 +69,7 @@ namespace NRenoiseTools
         public void Load(string fileNameArg)
         {
             fileName = fileNameArg;
-            Load(new FileStream(fileName, FileMode.Open));
+            Load(new FileStream(fileName, FileMode.Open, FileAccess.Read));
         }
 
         /// <summary>

@@ -247,7 +247,7 @@ namespace NRenoiseTools.XsdRenoiseParserApp
                 if (!xsdFiles[i].StartsWith("/"))
                 {
                     ConsoleLog.WriteLine("Load and merge XSD file from <{0}>",xsdFiles[i]);
-                    FileStream inputStream = new FileStream(xsdFiles[i], FileMode.Open);
+                    FileStream inputStream = new FileStream(xsdFiles[i], FileMode.Open, FileAccess.Read);
                     xsdFileUsed.Add(Path.GetFileName(xsdFiles[i]));
                     XmlSchema tempSchema = XmlSchema.Read(inputStream, ValidateXSDEventHandler);
                     CopySchemaElements(tempSchema, xs);
