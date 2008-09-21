@@ -34,7 +34,7 @@
 	<delete dir="BuildCHM"/>
   </target>
   
-  <target name="installer" description="Build Installer">
+  <target name="installer" description="Build Windows Installer">
    <call target="clean"/>
    <exec program="devenv" >
       <arg value="NRenoiseTools.sln" />
@@ -44,7 +44,7 @@
       <arg value="Setup"/>
    </exec>
   
-    <zip ziplevel="9" zipfile="NRenoiseTools-Install.zip">
+    <zip ziplevel="9" zipfile="NRenoiseTools-WindowsInstaller.zip">
       <fileset basedir="Setup/Release">
         <include name="**" />
       </fileset>
