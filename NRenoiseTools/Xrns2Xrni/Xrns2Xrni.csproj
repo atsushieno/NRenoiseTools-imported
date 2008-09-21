@@ -13,7 +13,7 @@
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <StartupObject>NRenoiseTools.Xrns2XrniApp.Program</StartupObject>
-    <ApplicationIcon>nrenoisetools.ico</ApplicationIcon>
+    <ApplicationIcon>NRenoiseTools.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -86,7 +86,7 @@
     <None Include="Resources\x-red.gif" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="nrenoisetools.ico" />
+    <Content Include="NRenoiseTools.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

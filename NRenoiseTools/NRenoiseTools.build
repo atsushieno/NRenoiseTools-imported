@@ -16,6 +16,42 @@
   <target name="build" description="Build all targets.">
     <call target="build.NRenoiseTools"/>
   </target>
+  
+  <target name="doc" description="Build Documentation">
+	<delete dir="BuildCHM"/>
+	<mkdir dir="BuildCHM"/>
+	<copy todir="BuildCHM">
+		<fileset basedir="Bin">
+			<include name="**" />
+		</fileset>
+	</copy>
+
+	<exec program="build_Sandcastle.bat" workingdir="BuildCHM">
+		<arg value="vs2005"/>
+		<arg value="NRenoiseTools"/>
+	</exec>
+	<copy file="BuildCHM/chm/NRenoiseTools.chm" todir="."/>
+	<delete dir="BuildCHM"/>
+  </target>
+  
+  <target name="installer" description="Build Installer">
+   <call target="clean"/>
+   <exec program="devenv" >
+      <arg value="NRenoiseTools.sln" />
+      <arg value="/Build"/>
+      <arg value="Release"/>
+      <arg value="/Project"/>
+      <arg value="Setup"/>
+   </exec>
+  
+    <zip ziplevel="9" zipfile="NRenoiseTools-Install.zip">
+      <fileset basedir="Setup/Release">
+        <include name="**" />
+      </fileset>
+    </zip>
+    
+    <call target="clean"/>
+  </target>
 
   <target name="rebuild" depends="clean, build" />
 
@@ -32,7 +68,7 @@
       <arg value="/p:Configuration=Debug"/>
       <arg value="Samples/NRenoiseToolsSample.sln" />
     </exec>
-
+    
     <call target="clean"/>
 
     <zip ziplevel="9" zipfile="NRenoiseTools-Bin.zip">
@@ -57,6 +93,7 @@
       </fileset>
     </zip> 
     
+
     <call target="clean"/>    
   </target>
 </project>

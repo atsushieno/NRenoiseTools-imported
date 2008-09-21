@@ -12,6 +12,13 @@
     <AssemblyName>Xrns2Midi</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <ApplicationIcon>NRenoiseTools.ico</ApplicationIcon>
+    <StartupObject>NRenoiseTools.Xrns2MidiApp.Program</StartupObject>
+    <ManifestCertificateThumbprint>75A64148EF6718F112298D58F073EDC6FFA0EFF5</ManifestCertificateThumbprint>
+    <ManifestKeyFile>Xrns2Midi_TemporaryKey.pfx</ManifestKeyFile>
+    <GenerateManifests>true</GenerateManifests>
+    <SignManifests>true</SignManifests>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -22,13 +29,11 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
+    <AutorunEnabled>true</AutorunEnabled>
+    <ApplicationRevision>2</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <ApplicationIcon>nrenoisetools.ico</ApplicationIcon>
-    <StartupObject>NRenoiseTools.Xrns2MidiApp.Program</StartupObject>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -120,15 +125,16 @@
     <None Include="Resources\stop.gif" />
     <None Include="Resources\go.gif" />
     <None Include="Resources\drafts-open.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="nrenoisetools.ico" />
+    <None Include="Xrns2Midi_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NRenoiseTools\NRenoiseTools.csproj">
       <Project>{61C514D6-1D5F-4AA7-BF91-7B11296BD4EA}</Project>
       <Name>NRenoiseTools</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="NRenoiseTools.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
