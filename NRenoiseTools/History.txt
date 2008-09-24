@@ -1,1 +1,6 @@
+24 Sep 2008, Minor release of NRenoiseTools 1.0.1
+    * Minor change in Xrns2Midi to use a cyclic channel when number instruments are beyond the number of 0-15 Midi channels.
+    * A Windows Installer of NRenoiseTools for end users ((With shortcuts creation in program's menu and desktop)
+    * A Refactoring of building process to simplify the creation of serializers and to include documentation and windows installer creation in the build.
+    * The format file used is built on top of the Renoise 1.9.1 release.
 18 Sep 2008, Initial version. Release of NRenoiseTools 1.0

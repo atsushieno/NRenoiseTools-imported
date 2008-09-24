@@ -224,9 +224,8 @@ namespace NRenoiseTools.XsdRenoiseParserApp
         /// <param name="outputNamespace">The output namespace.</param>
         /// <param name="outputXSDPrefixName">Name of the output XSD prefix.</param>
         /// <param name="isGeneratingCSharpCode">if set to <c>true</c> [is generating C sharp code].</param>
-        /// <param name="isGeneratingSerializers">if set to <c>true</c> [is generating serializers].</param>
         /// <returns></returns>
-        public bool Generate(String[] xsdFiles, string outputNamespace, string outputXSDPrefixName, bool isGeneratingCSharpCode, bool isGeneratingSerializers)
+        public bool Generate(String[] xsdFiles, string outputNamespace, string outputXSDPrefixName, bool isGeneratingCSharpCode)
         {
             //AppDomainSetup domaininfo = new AppDomainSetup();
             //domaininfo.ShadowCopyFiles = "true";
@@ -410,12 +409,6 @@ namespace NRenoiseTools.XsdRenoiseParserApp
             output.Flush();
             output.Close();
 
-
-            if ( ! isGeneratingCSharpCode && isGeneratingSerializers )
-            {
-                isGeneratingCSharpCode = true;
-            }
-
             // Generate CSharp code?
             if (isGeneratingCSharpCode)
             {
@@ -428,7 +421,13 @@ namespace NRenoiseTools.XsdRenoiseParserApp
                                              "/nologo"
                                          }
                         );
-
+                if (xsdResult != 0)
+                {
+                    return false;
+                }
+                /*
+                 * Serializers generaetion are now integrated in the build of NRenoiseTools (see NRenoiseTools.csproj)
+                 * 
                 // If .cs ok, generate serializers?
                 if (xsdResult == 0 && isGeneratingSerializers)
                 {
@@ -460,6 +459,7 @@ namespace NRenoiseTools.XsdRenoiseParserApp
                         return false;
                     }
                 }
+                 */
             }
 
             log.Close();

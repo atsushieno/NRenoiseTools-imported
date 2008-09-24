@@ -89,7 +89,7 @@ namespace NRenoiseTools
             StreamReader instrumentStream = new StreamReader(zipFile.GetInputStream(zipEntry));
 
             // Use generated Serializer
-            XmlSerializer xSerializer = new Microsoft.Xml.Serialization.GeneratedAssembly.RenoiseInstrumentSerializer();
+            XmlSerializer xSerializer = RenoiseXmlSerializerFactory.Find(typeof(RenoiseInstrument));
 
             // Deserialize Instrument.xml
             RenoiseInstrument instrument = (RenoiseInstrument)xSerializer.Deserialize(instrumentStream);
@@ -152,7 +152,7 @@ namespace NRenoiseTools
 
             // Serializer Instrument
             // Get Instrument.xml from xrni archive
-            XmlSerializer instrumentSerializer = new Microsoft.Xml.Serialization.GeneratedAssembly.RenoiseInstrumentSerializer();
+            XmlSerializer instrumentSerializer = RenoiseXmlSerializerFactory.Find(typeof (RenoiseInstrument));
             // XmlSerializer instrumentSerializer= new XmlSerializer(typeof(RenoiseInstrument));
             // RenoiseInstrumentSerializer instrumentSerializer = new RenoiseInstrumentSerializer();
             MemoryStream instrumentStream = new MemoryStream();

@@ -36,7 +36,7 @@ namespace NRenoiseTools.XsdRenoiseParserApp
             string outputXSDPrefixName = DefaultXSDPrefixName;
             string outputNamespace = DefaultNamespace;
             bool isGeneratingClasses = false;
-            bool isGeneratingSerializers = false;
+            // bool isGeneratingSerializers = false;
 
             bool isArgumentsOk = true;
             foreach (string arg in args)
@@ -52,9 +52,9 @@ namespace NRenoiseTools.XsdRenoiseParserApp
                 } else if ( arg == "/classes")
                 {
                     isGeneratingClasses = true;   
-                } else if ( arg == "/serializers")
-                {
-                    isGeneratingSerializers = true;
+                //} else if ( arg == "/serializers")
+                //{
+                //    isGeneratingSerializers = true;
                 } else if ( arg.StartsWith("/"))
                 {
                     Console.WriteLine("Invalid argument <{0}>. Check usage", arg);
@@ -64,10 +64,10 @@ namespace NRenoiseTools.XsdRenoiseParserApp
 
             if (isArgumentsOk)
             {
-                return parser.Generate(args, outputNamespace, outputXSDPrefixName, isGeneratingClasses, isGeneratingSerializers) ? 0 : 1;
+                return parser.Generate(args, outputNamespace, outputXSDPrefixName, isGeneratingClasses) ? 0 : 1;
             }
 usage:
-            Console.WriteLine("Usage: XsdRenoiseParser.exe RenoiseSongX.xsd  RenoiseInstrumentY.xsd  RenoiseDeviceChainZ.xsd [/out:{0}] [/ns:{1}] [/classes] [/serializers]", DefaultXSDPrefixName, DefaultNamespace);
+            Console.WriteLine("Usage: XsdRenoiseParser.exe RenoiseSongX.xsd  RenoiseInstrumentY.xsd  RenoiseDeviceChainZ.xsd [/out:{0}] [/ns:{1}] [/classes]", DefaultXSDPrefixName, DefaultNamespace);
             Console.WriteLine("Press any key to end the program");
             Console.ReadKey(true);
             return -1;

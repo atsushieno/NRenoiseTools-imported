@@ -12,6 +12,8 @@
     <AssemblyName>NRenoiseTools</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>nrenoisetools.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,15 +32,12 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>..\Bin\NRenoiseTools.xml</DocumentationFile>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ICSharpCode.SharpZipLib, Version=0.85.4.369, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>.\ICSharpCode.SharpZipLib.dll</HintPath>
-    </Reference>
-    <Reference Include="NRenoiseTools.XmlSerializers, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>.\NRenoiseTools.XmlSerializers.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -61,6 +60,7 @@
     <Compile Include="SongTempo.cs" />
     <Compile Include="TextBoxWriter.cs" />
     <Compile Include="Util.cs" />
+    <Compile Include="RenoiseXmlSerializerFactory.cs" />
     <Compile Include="ZipEntryStreamSource.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -74,12 +74,27 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="nrenoisetools.snk" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
+  -->
+  <Target Name="GenSerializationAssembly" DependsOnTargets="AssignTargetPaths;Compile;ResolveKeySource" Inputs="$(MSBuildAllProjects);@(IntermediateAssembly)" Outputs="$(OutputPath)$(_SGenDllName)">
+    <Message Text="Delete $(_SGenDllName)" />
+    <!--          <Delete Files="$(_SGenDllName)" />-->
+    <SGen BuildAssemblyName="$(TargetFileName)" BuildAssemblyPath="$(OutputPath)" References="@(ReferencePath)" ShouldGenerateSerializer="true" UseProxyTypes="false" KeyContainer="$(KeyContainerName)" KeyFile="$(KeyOriginatorFile)" DelaySign="$(DelaySign)" ToolPath="$(SGenToolPath)">
+      <Output TaskParameter="SerializationAssembly" ItemName="SerializationAssembly" />
+    </SGen>
+    <!--          <Message Text="Copy $(_SGenDllName) to $(OutputPath)"/>
+	<Copy
+	    SourceFiles="$(_SGenDllName)"
+	    DestinationFolder="$(OutputPath)"
+	/>
+        <Delete Files="$(_SGenDllName)" />	-->
+  </Target>
   <Target Name="BeforeBuild">
   </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+  <Target Name="AfterBuild" DependsOnTargets="GenSerializationAssembly" />
 </Project>

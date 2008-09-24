@@ -16,6 +16,9 @@
   <target name="build" description="Build all targets.">
     <call target="build.NRenoiseTools"/>
   </target>
+
+  <target name="full" description="Full build targets." depends="clean, build, doc, installer">
+  </target>
   
   <target name="doc" description="Build Documentation">
 	<delete dir="BuildCHM"/>
@@ -57,6 +60,13 @@
 
   <target name="build.NRenoiseTools">
     <call target="clean"/>
+    
+    <delete>
+      <fileset>
+        <include name="Bin/**" />
+      </fileset>
+    </delete>
+    
     <exec program="msbuild.exe" >
       <arg value="/t:Build"/>
       <arg value="/p:Configuration=Release"/>
@@ -71,6 +81,12 @@
     
     <call target="clean"/>
 
+    <delete>
+      <fileset>
+        <include name="Samples/**/*.cache" />
+      </fileset>
+    </delete>
+    
     <zip ziplevel="9" zipfile="NRenoiseTools-Bin.zip">
       <fileset basedir="..">
         <include name="NRenoiseTools/Bin/**" />
@@ -93,7 +109,6 @@
       </fileset>
     </zip> 
     
-
     <call target="clean"/>    
   </target>
 </project>

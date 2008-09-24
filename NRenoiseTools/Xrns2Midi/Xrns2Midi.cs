@@ -101,7 +101,7 @@ namespace NRenoiseTools.Xrns2MidiApp
 
                 instruments = new RenoiseMidiInstrument[Song.Instruments.Length];
                 // Init channels marker with -1
-                int[] channels = new int[15];
+                int[] channels = new int[16];
                 for (int i = 0; i < channels.Length; i++)
                 {
                     channels[i] = -1;
@@ -163,6 +163,7 @@ namespace NRenoiseTools.Xrns2MidiApp
                                  }
                 });
 
+                int cyclicChannel = 0;
                 // Affect channels for instrument that are not midi
                 for (int i = 0; i < instruments.Length; i++)
                 {
@@ -190,8 +191,9 @@ namespace NRenoiseTools.Xrns2MidiApp
                         // Throws an exception
                         if (instrument.channel < 0)
                         {
-                            Log.WriteLine("\tUnable to affect a channel for Instrument N°{0} (Name: {1})", i, Song.Instruments[i].Name);
-                            throw new Exception(String.Format("Unable to assign a channel to instrument N°{0}. No more Midi channels available", i));
+                            instrument.channel = cyclicChannel + 1;
+                            Log.WriteLine("\tWarning, unable to affect a channel for Instrument N°{0} (Name: {1}). Reuse channel N°{2} already used.", i, Song.Instruments[i].Name, instrument.channel);
+                            cyclicChannel = (cyclicChannel + 1) % 16;
                         }
 
                         // If patch is affected. Send MIDI Patch Change

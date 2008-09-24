@@ -81,18 +81,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_8218C473E709A5301E7639B9F7A84D4F"
-        "OwnerKey" = "8:_23BA168242F447CB96D0B960D14CB51D"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_8218C473E709A5301E7639B9F7A84D4F"
-        "OwnerKey" = "8:_BDBE2EEF485C29DE2CF5364F17333AED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_8CF737EDBDDA11B438EF4F9C47091CBD"
         "OwnerKey" = "8:_CC23737B5559414880C1E39401C47935"
         "MsmSig" = "8:_UNDEFINED"
@@ -159,18 +147,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_FC55DFA87A194F27D93B8920B7E604FF"
-        "OwnerKey" = "8:_B74F056B346C4EF4A9B5A95D5F672FFC"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_FC55DFA87A194F27D93B8920B7E604FF"
-        "OwnerKey" = "8:_CA2C6B061EA141E1AF490A9F94D16F95"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_B74F056B346C4EF4A9B5A95D5F672FFC"
         "MsmSig" = "8:_UNDEFINED"
@@ -208,12 +184,6 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_FC55DFA87A194F27D93B8920B7E604FF"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_BDBE2EEF485C29DE2CF5364F17333AED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -221,12 +191,6 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_23BA168242F447CB96D0B960D14CB51D"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_8218C473E709A5301E7639B9F7A84D4F"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -493,37 +457,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_8218C473E709A5301E7639B9F7A84D4F"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:NRenoiseTools.XmlSerializers, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_8218C473E709A5301E7639B9F7A84D4F"
-                    {
-                    "Name" = "8:NRenoiseTools.XmlSerializers.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:NRenoiseTools.XmlSerializers.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_C359283816044C17B16092C3E96E67CE"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_8CF737EDBDDA11B438EF4F9C47091CBD"
             {
             "AssemblyRegister" = "3:1"
@@ -619,7 +552,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:NRenoiseTools, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:NRenoiseTools, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5fc9b172611661e4, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_BDBE2EEF485C29DE2CF5364F17333AED"
@@ -664,37 +597,6 @@
             "Register" = "3:1"
             "Exclude" = "11:TRUE"
             "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_FC55DFA87A194F27D93B8920B7E604FF"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:NRenoiseTools.XmlSerializers, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_FC55DFA87A194F27D93B8920B7E604FF"
-                    {
-                    "Name" = "8:NRenoiseTools.XmlSerializers.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:NRenoiseTools.XmlSerializers.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_C359283816044C17B16092C3E96E67CE"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
         }
@@ -764,14 +666,14 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:NRenoiseTools"
-        "ProductCode" = "8:{53CA46C8-49C2-4965-A83F-267B77A4DFD2}"
-        "PackageCode" = "8:{AEF7833D-EAE0-4003-B8F8-96F6E8013F8D}"
+        "ProductCode" = "8:{D6520A07-40AD-4E84-B888-74CFED8CDE87}"
+        "PackageCode" = "8:{36B9DBC2-74E4-4A10-A1AC-B393F42DE2C4}"
         "UpgradeCode" = "8:{5E4D8E75-8445-4315-BD78-43A4651BF25E}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.0.0"
+        "ProductVersion" = "8:1.0.1"
         "Manufacturer" = "8:NRenoiseTools"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:http://www.codeplex.com/nrenoisetools"

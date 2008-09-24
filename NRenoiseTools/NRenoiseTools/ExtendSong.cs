@@ -89,7 +89,7 @@ namespace NRenoiseTools
             StreamReader songStream = new StreamReader(zipFile.GetInputStream(zipEntry));
 
             // Use generated Serializer
-            XmlSerializer xSerializer = new Microsoft.Xml.Serialization.GeneratedAssembly.RenoiseSongSerializer();
+            XmlSerializer xSerializer = RenoiseXmlSerializerFactory.Find(typeof (RenoiseSong));
 
             // Deserialize Song.xml
             RenoiseSong song = (RenoiseSong)xSerializer.Deserialize(songStream);
@@ -158,7 +158,7 @@ namespace NRenoiseTools
 
             // Serializer Song
             // Get Song.xml from xrns archive
-            XmlSerializer songSerializer = new Microsoft.Xml.Serialization.GeneratedAssembly.RenoiseSongSerializer();
+            XmlSerializer songSerializer = RenoiseXmlSerializerFactory.Find(typeof (RenoiseSong));
             // XmlSerializer songSerializer= new XmlSerializer(typeof(RenoiseSong));
             // RenoiseSongSerializer songSerializer = new RenoiseSongSerializer();
             MemoryStream songStream = new MemoryStream();
