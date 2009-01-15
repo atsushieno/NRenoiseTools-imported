@@ -25,7 +25,7 @@ namespace NRenoiseTools
         private double timePosition;
         private double beatPosition;
 
-        public SongTempoMarker(int bpm, int speed, int positionInSong, double timePosition, double beatPosition)
+        public SongTempoMarker(float bpm, int speed, int positionInSong, double timePosition, double beatPosition)
             : base(bpm, speed)
         {
             this.position = positionInSong;
@@ -73,19 +73,19 @@ namespace NRenoiseTools
 
     public class SongTempo
     {
-        private int bpm;
+        private float bpm;
         private int speed;
         private int lpb;
-        private int realbpm;
+        private float realbpm;
 
-        public SongTempo(int bpm, int speed)
+        public SongTempo(float bpm, int speed)
         {
             this.bpm = bpm;
             this.speed = speed;
             updateRealBpm();
         }
 
-        public int Bpm
+        public float Bpm
         {
             get { return bpm; }
             set { bpm = value; updateRealBpm(); }
@@ -102,7 +102,7 @@ namespace NRenoiseTools
             get { return lpb; }
         }
 
-        public int Realbpm
+        public float Realbpm
         {
             get { return realbpm; }
         }

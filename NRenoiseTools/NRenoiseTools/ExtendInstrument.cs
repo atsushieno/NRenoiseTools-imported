@@ -34,6 +34,8 @@ namespace NRenoiseTools
         /// </summary>
         public Instrument()
         {
+            copyIntoNewSampleNameCounterField = 0;
+            copyIntoNewInstrumentNameCounterField = 0;
             MethodBase methodBase = new StackTrace().GetFrame(1).GetMethod();
             // If 
             if (!methodBase.IsConstructor || !(methodBase.DeclaringType == typeof(RenoiseInstrument)))

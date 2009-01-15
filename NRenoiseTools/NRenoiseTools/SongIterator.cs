@@ -319,11 +319,12 @@ namespace NRenoiseTools
             }
 
             // Iterate on Pattern SendTracks
-            for (int i = 0; i < pattern.Tracks.PatternSendTrack.Length; i++, trackIndex++)
-            {
-                track = pattern.Tracks.PatternSendTrack[i];
-                IterateTrack(it);
-            }
+            if ( pattern.Tracks.PatternSendTrack != null )
+                for (int i = 0; i < pattern.Tracks.PatternSendTrack.Length; i++, trackIndex++)
+                {
+                    track = pattern.Tracks.PatternSendTrack[i];
+                    IterateTrack(it);
+                }
 
             // Iterate on Pattern MasterTracks
             for (int i = 0; i < pattern.Tracks.PatternMasterTrack.Length; i++, trackIndex++)
@@ -403,9 +404,9 @@ namespace NRenoiseTools
         {
             public int pos;
             public int col;
-            public int bpm;
+            public float bpm;
             public int speed;
-            public InternalTempoEvent(int col, int pos, int bpm, int speed)
+            public InternalTempoEvent(int col, int pos, float bpm, int speed)
             {
                 this.col = col;
                 this.pos = pos;
@@ -429,6 +430,7 @@ namespace NRenoiseTools
         private void prepareTempoForSong()
         {
             // Initialize first tempo marker with global settings
+            // TODO: CONVERT Beat from int to float in SongTempoMarker
             SongTempoMarker currentTempo = new SongTempoMarker(Song.GlobalSongData.BeatsPerMin,
                                                                            Song.GlobalSongData.TicksPerLine, 0, 0, 0);
 
@@ -507,7 +509,7 @@ namespace NRenoiseTools
                         }
                     }
                     i--;
-                    int bpm = (bpmEvent != null) ? bpmEvent.bpm : lastTempo.Bpm;
+                    float bpm = (bpmEvent != null) ? bpmEvent.bpm : lastTempo.Bpm;
                     int speed = (speedEvent != null) ? speedEvent.speed : lastTempo.Speed;
 
                     // Get time for this marker (use last tempo marker to get the time offset)
