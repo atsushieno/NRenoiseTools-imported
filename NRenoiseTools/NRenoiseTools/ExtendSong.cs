@@ -25,21 +25,29 @@ namespace NRenoiseTools
     /// <summary>
     /// Main Renoise Song class. Use this class to create and manipulate Renoise Song.
     /// </summary>
-    partial class Song
+    partial class RenoiseSong
     {
         private string fileName;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Song"/> class.
+        /// Initializes a new instance of the <see cref="RenoiseSong"/> class.
         /// </summary>
-        public Song()
+        //public RenoiseSong()
+        //{
+        //    MethodBase methodBase = new StackTrace().GetFrame(1).GetMethod();
+        //    // If 
+        //    if ( ! methodBase.IsConstructor || ! (methodBase.DeclaringType == typeof(RenoiseSong)) )
+        //    {
+        //        Load(new MemoryStream(Properties.Resources.EmptySong));        
+        //    }            
+        //}
+
+        public RenoiseSong()
         {
-            MethodBase methodBase = new StackTrace().GetFrame(1).GetMethod();
-            // If 
-            if ( ! methodBase.IsConstructor || ! (methodBase.DeclaringType == typeof(RenoiseSong)) )
-            {
-                Load(new MemoryStream(Properties.Resources.EmptySong));        
-            }            
+            SelectedInstrumentIndex = 0;
+            SelectedSampleIndex = 0;
+            SelectedTrackIndex = 0;
+            doc_version = 21;            
         }
 
         /// <summary>
@@ -47,17 +55,23 @@ namespace NRenoiseTools
         /// loading song from a file <see cref="Load(string)"/>.
         /// </summary>
         /// <value>The name of the file.</value>
+        [XmlIgnore]
         public string FileName
         {
             get { return fileName; }
             set { fileName = value; }
         }
 
+        public void Reset()
+        {
+            Load(new MemoryStream(Properties.Resources.EmptySong));            
+        }
+
         /// <summary>
         /// Copies this song to another song.
         /// </summary>
         /// <param name="toSong">song to copy to.</param>
-        public void Copy(Song toSong)
+        public void Copy(RenoiseSong toSong)
         {
             Util.Copy(this, toSong);
         }
@@ -103,8 +117,8 @@ namespace NRenoiseTools
             FileName = savedFileName;
 
             // Set all buffer Samples to null
-            foreach (Instrument instrument in Instruments) {
-                foreach (Sample sample in instrument.Samples)
+            foreach (RenoiseInstrument instrument in Instruments.Instrument) {
+                foreach (var sample in instrument.Samples.Sample)
                 {
                     sample.Buffer = null;
                 }
@@ -121,7 +135,7 @@ namespace NRenoiseTools
                     string sampleName = pathNames[2];
                     int instrumentIndex = int.Parse(instrumentName.Substring("Instrument".Length, 3));
                     int sampleIndex = int.Parse(sampleName.Substring("Sample".Length, 3));
-                    Instruments[instrumentIndex].Samples[sampleIndex].LoadBufferFromZip(zipFile, sampleEntry);
+                    Instruments.Instrument[instrumentIndex].Samples.Sample[sampleIndex].LoadBufferFromZip(zipFile, sampleEntry);
                 }
             }
             xrnsInputStream.Close();
@@ -175,21 +189,20 @@ namespace NRenoiseTools
             // Add Samples to archive
             if (Instruments != null)
             {
-                for (int i = 0; i < Instruments.Length; i++)
+                for (int i = 0; i < Instruments.Instrument.Length; i++)
                 {
-                    Instrument instrument = Instruments[i];
+                    RenoiseInstrument instrument = Instruments.Instrument[i];
                     if (instrument.Samples != null)
                     {
-                        for (int j = 0; j < instrument.Samples.Length; j++)
+                        for (int j = 0; j < instrument.Samples.Sample.Length; j++)
                         {
-                            Sample sample = instrument.Samples[j];
-                            int index = "Sample00 ".Length;
-                            string fileName = sample.FileName == null ? "Undefined" : Path.GetFileName(sample.FileName);
-                            string sampleName = fileName.Substring(index, fileName.Length - index);
+                            InstrumentSample sample = instrument.Samples.Sample[j];
+                            //int index = "Sample00 ".Length;
+                            string sampleName = sample.Name ?? "Undefined";
                             string sampleNameEntry = String.Format(
-                                "SampleData/Instrument{0:D2} ({1})/Sample{2:D2} {3}", i,
+                                "SampleData/Instrument{0:D2} ({1})/Sample{2:D2} ({3}){4}", i,
                                 instrument.Name,
-                                j, sampleName);
+                                j, sampleName, sample.Extension);
                             sample.SaveBufferToZip(zipFile, sampleNameEntry);
                         }
                     }

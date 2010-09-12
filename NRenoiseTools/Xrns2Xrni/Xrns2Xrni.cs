@@ -15,6 +15,8 @@
 using System;
 using System.IO;
 using NRenoiseTools;
+using Song = NRenoiseTools.RenoiseSong;
+using Instrument = NRenoiseTools.RenoiseInstrument;
 
 namespace NRenoiseTools.Xrns2XrniApp
 {
@@ -45,9 +47,9 @@ namespace NRenoiseTools.Xrns2XrniApp
                                                     ? (song.GlobalSongData.SongName ?? "RenoiseSong")
                                                     : Path.GetFileNameWithoutExtension(song.FileName);
 
-                for (int i = 0; i < song.Instruments.Length; i++)
+                for (int i = 0; i < song.Instruments.Instrument.Length; i++)
                 {
-                    Instrument instrument = song.Instruments[i];
+                    Instrument instrument = song.Instruments.Instrument[i];
 
                     string pathOfXrns = Path.GetDirectoryName(xrnsFile);
                     string instrumentName = string.Format("{0}\\{1}-Inst{2:D2} ({3}).xrni", pathOfXrns,

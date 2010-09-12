@@ -1,4 +1,4 @@
 setlocal
-set SCHEMA="C:\Program Files\Renoise 2.0.0\Schemas"
-..\Bin\XsdRenoiseParser %SCHEMA%\RenoiseSong14.xsd %SCHEMA%\RenoiseInstrument7.xsd %SCHEMA%\RenoiseDeviceChain7.xsd /out:RenoiseModel200 /classes
+set SCHEMA="C:\Program Files (x86)\Renoise 2.5.0\Schemas"
+..\Bin\XsdRenoiseParser %SCHEMA%\RenoiseSong21.xsd /out:RenoiseModel250 /classes
 pause

@@ -16,6 +16,9 @@ using System;
 using System.IO;
 using NRenoiseTools;
 
+using Song = NRenoiseTools.RenoiseSong;
+using Instrument = NRenoiseTools.RenoiseInstrument;
+
 namespace SongIteratorSample
 {
     class Program

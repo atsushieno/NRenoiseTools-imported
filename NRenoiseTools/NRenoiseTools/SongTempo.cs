@@ -25,8 +25,8 @@ namespace NRenoiseTools
         private double timePosition;
         private double beatPosition;
 
-        public SongTempoMarker(float bpm, int speed, int positionInSong, double timePosition, double beatPosition)
-            : base(bpm, speed)
+        public SongTempoMarker(float bpm, int linePerBeat, int positionInSong, double timePosition, double beatPosition)
+            : base(bpm, linePerBeat)
         {
             this.position = positionInSong;
             this.timePosition = timePosition;
@@ -74,75 +74,30 @@ namespace NRenoiseTools
     public class SongTempo
     {
         private float bpm;
-        private int speed;
         private int lpb;
-        private float realbpm;
 
-        public SongTempo(float bpm, int speed)
+        public SongTempo(float bpm, int linePerBeat)
         {
             this.bpm = bpm;
-            this.speed = speed;
-            updateRealBpm();
+            this.lpb = linePerBeat;
         }
 
         public float Bpm
         {
             get { return bpm; }
-            set { bpm = value; updateRealBpm(); }
-        }
-
-        public int Speed
-        {
-            get { return speed; }
-            set { speed = value; updateRealBpm(); }
+            set { bpm = value; }
         }
 
         public int Lpb
         {
             get { return lpb; }
         }
-
-        public float Realbpm
-        {
-            get { return realbpm; }
-        }
-
-        private void updateRealBpm()
-        {
-            realbpm = (speed == 1 || speed == 2 || speed == 3 || speed == 6 || speed == 12) ? bpm : ((int)Math.Round(6.0 / speed * bpm, 0));
-            lpb = LPBFromSpeed(speed);
-        }
-
-        private static int LPBFromSpeed(int speed)
-        {
-            int lpb = 0;
-            if (speed > 3)
-            {
-                lpb = 4;
-            }
-            else
-            {
-                switch (speed)
-                {
-                    case 3:
-                        lpb = 8;
-                        break;
-                    case 2:
-                        lpb = 12;
-                        break;
-                    case 1:
-                        lpb = 24;
-                        break;
-                }
-            }
-            return lpb;
-        }
-
+     
         public double TimePerBeat
         {
             get
             {
-                return Math.Floor(60000000.0/Realbpm);
+                return Math.Floor(60000000.0 / Bpm);
             }
         }
     }

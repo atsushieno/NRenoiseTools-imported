@@ -36,6 +36,7 @@ namespace NRenoiseTools.XsdRenoiseParserApp
         private MapComplexTypeToElement complexTypeToElements = new MapComplexTypeToElement();
         private Dictionary<string, MapComplexTypeToElement> nameToElementComplexTypes = new Dictionary<string, MapComplexTypeToElement>();
         private Dictionary<string, XmlSchemaComplexType> nameToComplexType = new Dictionary<string, XmlSchemaComplexType>();
+        private Dictionary<string, bool> nameToComplexTypeBuiltin = new Dictionary<string, bool>();
         private TextWriter log;
         private TextWriter ConsoleLog;
 
@@ -146,7 +147,17 @@ namespace NRenoiseTools.XsdRenoiseParserApp
             {
                 complexType = type as XmlSchemaComplexType;
                 if (complexType != null)
-                    ProcessParticle(complexType.ContentTypeParticle, level);
+                {
+                    if (!string.IsNullOrEmpty(complexType.Name))
+                    {
+                        nameToComplexTypeBuiltin.Add(complexType.Name, true);
+                        nameToComplexType.Add(complexType.Name, complexType);
+                    }
+                    else
+                    {
+                        ProcessParticle(complexType.ContentTypeParticle, level);
+                    }
+                }
             }
 
             foreach (XmlSchemaElement el in xs.Elements.Values)
@@ -371,7 +382,8 @@ namespace NRenoiseTools.XsdRenoiseParserApp
             // Add all complexType to final XSD
             foreach (KeyValuePair<string, XmlSchemaComplexType> pair in nameToComplexType)
             {
-                xs.Items.Add(pair.Value);
+                if (!nameToComplexTypeBuiltin.ContainsKey(pair.Key))
+                    xs.Items.Add(pair.Value);
             }
 
             // Revalidate the XSD
@@ -489,9 +501,9 @@ namespace NRenoiseTools.XsdRenoiseParserApp
         void PostProcessComplexType()
         {
             ConsoleLog.WriteLine("Apply PostProcess to Renoise XSD");
-            MakeRenoiseInstrumentInheritFromInstrument();
+            //MakeRenoiseInstrumentInheritFromInstrument();
             MakeTrackInheritance();
-            MakeSongInheritance();
+            //MakeSongInheritance();
         }
 
         /// <summary>
@@ -560,24 +572,27 @@ namespace NRenoiseTools.XsdRenoiseParserApp
         void MakeRenoiseInstrumentInheritFromInstrument()
         {
             ConsoleLog.WriteLine("--> Make RenoiseInstrument inheritance");
-            XmlSchemaComplexType instrumentComplexType;
             XmlSchemaComplexType renoiseInstrumentComplexType;
-            nameToComplexType.TryGetValue("Instrument", out instrumentComplexType);
             nameToComplexType.TryGetValue("RenoiseInstrument", out renoiseInstrumentComplexType);
-            if (instrumentComplexType == null || renoiseInstrumentComplexType == null)
-                return;
-
-            XmlSchemaObjectCollection attributes = renoiseInstrumentComplexType.Attributes;
-            if (attributes.Count == 1)
+            if (renoiseInstrumentComplexType != null)
             {
-                XmlSchemaAttribute docVersionAttribute = (XmlSchemaAttribute)attributes[0];
-                if (docVersionAttribute.Name == "doc_version")
-                {
-                    if (IsInstanceOfWithoutAttributes(renoiseInstrumentComplexType, instrumentComplexType))
-                    {
-                        MakeInheritance(renoiseInstrumentComplexType, "Instrument");
-                    }
-                }
+                // Create a complex type SongBase without the attributes
+                XmlSchemaComplexType newSong = new XmlSchemaComplexType();
+                newSong.Particle = renoiseInstrumentComplexType.Particle;
+                newSong.Name = "InstrumentBase";
+                newSong.IsAbstract = true;
+                nameToComplexType.Add(newSong.Name, newSong);
+
+                // Add complex type Song that inherits from SongBaes
+                newSong = new XmlSchemaComplexType();
+                newSong.Particle = null;
+                newSong.Name = "Instrument";
+                newSong.IsAbstract = false;
+                nameToComplexType.Add(newSong.Name, newSong);
+                MakeInheritance(newSong, "InstrumentBase");
+
+                // Make RenoiseSong inherit from Song
+                MakeInheritance(renoiseInstrumentComplexType, "Instrument");
             }
         }
 

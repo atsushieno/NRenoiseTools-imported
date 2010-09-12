@@ -12,7 +12,10 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
+using System;
 using System.IO;
+using System.Text.RegularExpressions;
+using System.Xml.Serialization;
 using ICSharpCode.SharpZipLib.Zip;
 
 namespace NRenoiseTools
@@ -20,18 +23,34 @@ namespace NRenoiseTools
     /// <summary>
     /// Sample class. This class to create and manipulate Renoise Song.
     /// </summary>
-    public partial class Sample
+    public partial class InstrumentSample
     {
         private byte[] buffer;
+        private string extension;
+
 
         /// <summary>
         /// Gets or sets the sample buffer.
         /// </summary>
         /// <value>The sample buffer.</value>
+        [XmlIgnore]
         public byte[] Buffer
         {
             get { return buffer; }
             set { buffer = value; }
+        }
+
+        [XmlIgnore]
+        public string Extension
+        {
+            get
+            {
+                return extension;
+            }
+            set
+            {
+                extension = value;
+            }
         }
 
         /// <summary>
@@ -45,15 +64,34 @@ namespace NRenoiseTools
             zipFile.Add(new ZipEntryStreamSource(sampleStream), sampleNameEntry);
         }
 
+        private Regex matchSampleName = new Regex(@"^Sample(\d\d)[ ]+\((.*)\)(.*)",RegexOptions.IgnoreCase);
+
         /// <summary>
         /// Loads the buffer from a ZipEntry.
         /// </summary>
         /// <param name="zipFile">The zip file.</param>
         /// <param name="sampleEntry">The sample entry.</param>
         internal void LoadBufferFromZip(ZipFile zipFile, ZipEntry sampleEntry)
-        {
+        {            
             string sampleName = Path.GetFileName(sampleEntry.Name);
-            int sampleIndex = int.Parse(sampleName.Substring("Sample".Length, 3));
+            extension = Path.GetExtension(sampleEntry.Name);
+            Match match = matchSampleName.Match(sampleName);
+
+            if (!match.Success)
+                throw new ArgumentException(string.Format("Invalid sample name {0}",sampleName));
+
+
+
+
+            int sampleIndex = int.Parse(match.Groups[1].Value);
+
+            FileName = null;
+            //FileName = match.Groups[2].Value;
+            //if (FileName == "Undefined")
+            //{
+            //    FileName = null;
+            //}
+
             long size = sampleEntry.Size;
             buffer = new byte[size];
             Stream sampleStream = zipFile.GetInputStream(sampleEntry);

@@ -14,6 +14,9 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 using NRenoiseTools;
 
+using Song = NRenoiseTools.RenoiseSong;
+using Instrument = NRenoiseTools.RenoiseInstrument;
+
 namespace SongInstrumentLoadSaveSample
 {
     /// <summary>
@@ -29,14 +32,14 @@ namespace SongInstrumentLoadSaveSample
             song.Load("DemoSong - Diggin for Gold.xrns");
 
             // Save the first instrument of this song to a file
-            song.Instruments[0].Save("MyInstrument.xrni");
+            song.Instruments.Instrument[0].Save("MyInstrument.xrni");
 
             // Load previously instrument 
-            Instrument instrument = new Instrument();
+            RenoiseInstrument instrument = new RenoiseInstrument();
             instrument.Load("MyInstrument.xrni");
 
             // Replace the instrument in the song
-            song.Instruments[0] = instrument;
+            song.Instruments.Instrument[0] = instrument;
 
             // Save the Song to another XRNS file
             song.Save("NewDemoSong.xrns");

@@ -14,6 +14,8 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 using System;
 using System.Collections.Generic;
+using Song = NRenoiseTools.RenoiseSong;
+using Instrument = NRenoiseTools.RenoiseInstrument;
 
 namespace NRenoiseTools
 {
@@ -68,10 +70,10 @@ namespace NRenoiseTools
         private int lineIndex;
         private int lineIndexInTrack;
         private int lineIndexInSong;
-        private Line line;
+        private PatternTrackLine line;
         private int columnIndex;
-        private NoteColumn noteColumn;
-        private EffectColumn effectColumn;
+        private PatternTrackNoteColumn noteColumn;
+        private PatternTrackEffectColumn effectColumn;
 
         private Stack<SongIterator> stateStackList;
 
@@ -155,7 +157,7 @@ namespace NRenoiseTools
         /// Gets the current line.
         /// </summary>
         /// <value>The line.</value>
-        public Line Line
+        public PatternTrackLine Line
         {
             get { return line; }
         }
@@ -173,7 +175,7 @@ namespace NRenoiseTools
         /// Gets the current note column.
         /// </summary>
         /// <value>The note column.</value>
-        public NoteColumn NoteColumn
+        public PatternTrackNoteColumn NoteColumn
         {
             get { return noteColumn; }
         }
@@ -182,7 +184,7 @@ namespace NRenoiseTools
         /// Gets the current effect column.
         /// </summary>
         /// <value>The effect column.</value>
-        public EffectColumn EffectColumn
+        public PatternTrackEffectColumn EffectColumn
         {
             get { return effectColumn; }
         }
@@ -272,9 +274,9 @@ namespace NRenoiseTools
             firstLineIndexOfCurrentPatternInSong = 0;
                 // Iterate on PatternSequence and retrieve the instruments used
             patternSequenceIndex = 0;
-            for (; patternSequenceIndex < song.PatternSequence.PatternSequence.Length; patternSequenceIndex++)
+            for (; patternSequenceIndex < song.PatternSequence.SequenceEntries.SequenceEntry.Length; patternSequenceIndex++)
             {
-                patternIndex = song.PatternSequence.PatternSequence[patternSequenceIndex];
+                patternIndex = song.PatternSequence.SequenceEntries.SequenceEntry[patternSequenceIndex].Pattern;
                 IteratePatternInternal(patternIndex, it);                
             }
             if (it.OnEndSong != null) it.OnEndSong(); 
@@ -302,7 +304,7 @@ namespace NRenoiseTools
         {
             ResetPatternLevel();
             patternIndex = patternIndexArg;
-            pattern = song.PatternPool.Patterns[patternIndex];
+            pattern = song.PatternPool.Patterns.Pattern[patternIndex];
 
             // Update Current Line Index
             lineIndexInSong = firstLineIndexOfCurrentPatternInSong;
@@ -371,9 +373,9 @@ namespace NRenoiseTools
                     if (line.NoteColumns != null && it.OnNote != null) 
                     {
                         effectColumn = null;
-                        for (columnIndex = 0; columnIndex < line.NoteColumns.Length; columnIndex++)
+                        for (columnIndex = 0; columnIndex < line.NoteColumns.NoteColumn.Length; columnIndex++)
                         {
-                            noteColumn = line.NoteColumns[columnIndex];
+                            noteColumn = line.NoteColumns.NoteColumn[columnIndex];
                             it.OnNote();
                         }
                     }
@@ -382,9 +384,9 @@ namespace NRenoiseTools
                     if (line.EffectColumns != null && it.OnEffect != null) 
                     {
                         noteColumn = null;
-                        for (columnIndex = 0; columnIndex < line.EffectColumns.Length; columnIndex++)
+                        for (columnIndex = 0; columnIndex < line.EffectColumns.EffectColumn.Length; columnIndex++)
                         {
-                            effectColumn = line.EffectColumns[columnIndex];
+                            effectColumn = line.EffectColumns.EffectColumn[columnIndex];
                             // Notify event
                             it.OnEffect();
                         }
@@ -405,13 +407,13 @@ namespace NRenoiseTools
             public int pos;
             public int col;
             public float bpm;
-            public int speed;
-            public InternalTempoEvent(int col, int pos, float bpm, int speed)
+            public int lpb;
+            public InternalTempoEvent(int col, int pos, float bpm, int lpb)
             {
                 this.col = col;
                 this.pos = pos;
                 this.bpm = bpm;
-                this.speed = speed;
+                this.lpb = lpb;
             }
 
             public int CompareTo(object obj)
@@ -432,7 +434,7 @@ namespace NRenoiseTools
             // Initialize first tempo marker with global settings
             // TODO: CONVERT Beat from int to float in SongTempoMarker
             SongTempoMarker currentTempo = new SongTempoMarker(Song.GlobalSongData.BeatsPerMin,
-                                                                           Song.GlobalSongData.TicksPerLine, 0, 0, 0);
+                                                                           Song.GlobalSongData.LinesPerBeat, 0, 0, 0);
 
             List<InternalTempoEvent> tempos = new List<InternalTempoEvent>();
 
@@ -464,7 +466,7 @@ namespace NRenoiseTools
                                         effectValue, -1);
                             }
                             break;
-                        // New Speed
+                        // New Lpb
                         case 0xF1:
 
                             if (effectValue > 0x00 && effectValue <= 0x1F)
@@ -493,7 +495,7 @@ namespace NRenoiseTools
                 {
                     InternalTempoEvent internalTempoEvent = tempos[i];
                     InternalTempoEvent bpmEvent = null;
-                    InternalTempoEvent speedEvent = null;
+                    InternalTempoEvent lpbEvent = null;
                     // Iterate on same line
                     for (int j = i; j < tempos.Count && tempos[j].pos == internalTempoEvent.pos; j++, i++)
                     {
@@ -504,13 +506,13 @@ namespace NRenoiseTools
                         }
                         else
                         {
-                            // Change in speed
-                            speedEvent = tempos[j];
+                            // Change in lpb
+                            lpbEvent = tempos[j];
                         }
                     }
                     i--;
                     float bpm = (bpmEvent != null) ? bpmEvent.bpm : lastTempo.Bpm;
-                    int speed = (speedEvent != null) ? speedEvent.speed : lastTempo.Speed;
+                    int lpb = (lpbEvent != null) ? lpbEvent.lpb : lastTempo.Lpb;
 
                     // Get time for this marker (use last tempo marker to get the time offset)
                     SongTempoMarker lastTempoMarker = temposForCurrentSong[temposForCurrentSong.Count - 1];
@@ -519,7 +521,7 @@ namespace NRenoiseTools
                     double newPositionBeat = lastTempoMarker.GetBeatFromOffset(internalTempoEvent.pos);
 
 
-                    SongTempoMarker newTempo = new SongTempoMarker(bpm, speed,
+                    SongTempoMarker newTempo = new SongTempoMarker(bpm, lpb,
                                                                                  internalTempoEvent.pos, newPositionTime, newPositionBeat);
       
                     // May be applied to first tempo in song

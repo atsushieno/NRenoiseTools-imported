@@ -17,6 +17,8 @@ using System.Collections.Generic;
 using System.IO;
 using NAudio.Midi;
 using NRenoiseTools;
+using Song = NRenoiseTools.RenoiseSong;
+using Instrument = NRenoiseTools.RenoiseInstrument;
 
 namespace NRenoiseTools.Xrns2MidiApp
 {
@@ -99,7 +101,7 @@ namespace NRenoiseTools.Xrns2MidiApp
             {
                 Log.WriteLine("Assign Instruments to channels");
 
-                instruments = new RenoiseMidiInstrument[Song.Instruments.Length];
+                instruments = new RenoiseMidiInstrument[Song.Instruments.Instrument.Length];
                 // Init channels marker with -1
                 int[] channels = new int[16];
                 for (int i = 0; i < channels.Length; i++)
@@ -130,7 +132,7 @@ namespace NRenoiseTools.Xrns2MidiApp
                                              RenoiseMidiInstrument midiInstrument = new RenoiseMidiInstrument();
                                              instruments[instrumentIndex] = midiInstrument;
 
-                                             Instrument instrument = Song.Instruments[instrumentIndex];
+                                             Instrument instrument = Song.Instruments.Instrument[instrumentIndex];
 
                                              // If midi instrument, then take the affected channel and patch
                                              if (instrument.MidiProperties.IsActive)
@@ -192,7 +194,7 @@ namespace NRenoiseTools.Xrns2MidiApp
                         if (instrument.channel < 0)
                         {
                             instrument.channel = cyclicChannel + 1;
-                            Log.WriteLine("\tWarning, unable to affect a channel for Instrument N°{0} (Name: {1}). Reuse channel N°{2} already used.", i, Song.Instruments[i].Name, instrument.channel);
+                            Log.WriteLine("\tWarning, unable to affect a channel for Instrument N°{0} (Name: {1}). Reuse channel N°{2} already used.", i, Song.Instruments.Instrument[i].Name, instrument.channel);
                             cyclicChannel = (cyclicChannel + 1) % 16;
                         }
 
