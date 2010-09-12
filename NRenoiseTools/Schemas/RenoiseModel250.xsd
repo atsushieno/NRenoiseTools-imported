@@ -1,0 +1,2363 @@
+<!--***********************************************************************************************************-->
+<!--RenoiseModel250.xsd generated automatically with XsdRenoiseParser. Generated on: 12/09/2010 13:24:15       -->
+<!--File used to generate this XSD:                                                                            -->
+<!--    RenoiseSong21.xsd                                                                                      -->
+<!--Check http://www.codeplex.com/nrenoisetools                                                                -->
+<!--***********************************************************************************************************-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="RenoiseSong" type="RenoiseSong" />
+  <xs:complexType name="RenoiseSong">
+    <xs:all>
+      <xs:element minOccurs="0" name="GlobalSongData" type="GlobalSongData" />
+      <xs:element minOccurs="0" name="RecordManager" type="RecordManager" />
+      <xs:element minOccurs="0" name="MidiMapper" type="MidiMapper" />
+      <xs:element minOccurs="0" name="Instruments">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="Instrument" type="RenoiseInstrument" />
+          </xs:sequence>
+          <xs:attribute name="type" type="xs:string" use="optional" />
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" default="0" name="SelectedInstrumentIndex" type="xs:int" />
+      <xs:element minOccurs="0" default="0" name="SelectedSampleIndex" type="xs:int" />
+      <xs:element minOccurs="0" name="Tracks">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="SequencerTrack" type="SequencerTrack" />
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="SequencerMasterTrack" type="SequencerMasterTrack" />
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="SequencerSendTrack" type="SequencerSendTrack" />
+          </xs:sequence>
+          <xs:attribute name="type" type="xs:string" use="optional" />
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" default="0" name="SelectedTrackIndex" type="xs:int" />
+      <xs:element minOccurs="0" name="PatternPool" type="PatternPool" />
+      <xs:element minOccurs="0" name="PatternSequence" type="PatternSequence" />
+    </xs:all>
+    <xs:attribute fixed="21" name="doc_version" type="xs:int" use="required" />
+    <xs:attribute name="type" type="xs:string" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="GlobalSongData">
+    <xs:all>
+      <xs:element minOccurs="0" default="4" name="Octave" type="xs:int" />
+      <xs:element minOccurs="0" default="1" name="EditStep" type="xs:int" />
+      <xs:element minOccurs="0" default="false" name="RecordQuantizationEnabled" type="xs:boolean" />
+      <xs:element minOccurs="0" default="1" name="RecordQuantizationAmount" type="xs:int" />
+      <xs:element minOccurs="0" default="4" name="LoopCoeff" type="xs:int" />
+      <xs:element minOccurs="0" default="80" name="BeatsPerMin" type="xs:float" />
+      <xs:element minOccurs="0" default="4" name="LinesPerBeat" type="xs:int" />
+      <xs:element minOccurs="0" default="12" name="TicksPerLine" type="xs:int" />
+      <xs:element minOccurs="0" default="4" name="SignatureNumerator" type="xs:int" />
+      <xs:element minOccurs="0" default="4" name="SignatureDenominator" type="xs:int" />
+      <xs:element minOccurs="0" default="false" name="ShuffleIsActive" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ShuffleAmounts">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" default="0" name="ShuffleAmount" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" default="Untitled" name="SongName" type="xs:string" />
+      <xs:element minOccurs="0" default="By Somebody" name="Artist" type="xs:string" />
+      <xs:element minOccurs="0" name="SongComments">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="SongComment" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" default="false" name="ShowSongCommentsAfterLoading" type="xs:boolean" />
+      <xs:element minOccurs="0" default="false" name="ShowUsedAutomationsOnly" type="xs:boolean" />
+      <xs:element minOccurs="0" default="false" name="SampleOffsetCompatibilityMode" type="xs:boolean" />
+      <xs:element minOccurs="0" default="false" name="PitchEffectsCompatibilityMode" type="xs:boolean" />
+      <xs:element minOccurs="0" default="4" name="PlaybackEngineVersion" type="xs:int" />
+      <xs:element minOccurs="0" default="0" name="RenderSelectionNameCounter" type="xs:int" />
+      <xs:element minOccurs="0" default="0" name="RecordSampleNameCounter" type="xs:int" />
+      <xs:element minOccurs="0" default="0" name="NewSampleNameCounter" type="xs:int" />
+    </xs:all>
+    <xs:attribute name="type" type="xs:string" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="RecordManager">
+    <xs:all>
+      <xs:element minOccurs="0" default="-1" name="LinkedTrackIndex" type="xs:int" />
+    </xs:all>
+    <xs:attribute name="type" type="xs:string" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="MidiMapper">
+    <xs:all>
+      <xs:element minOccurs="0" name="ActionMappings">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="ActionMapping" type="MidiActionMappings" />
+          </xs:sequence>
+          <xs:attribute name="type" type="xs:string" use="optional" />
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="type" type="xs:string" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="MidiActionMappings">
+    <xs:all>
+      <xs:element minOccurs="0" name="Action" type="xs:string" />
+      <xs:element minOccurs="0" name="MidiMappings">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="MidiMapping" type="MidiMapping" />
+          </xs:sequence>
+          <xs:attribute name="type" type="xs:string" use="optional" />
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="type" type="xs:string" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="MidiMapping">
+    <xs:all>
+      <xs:element minOccurs="0" default="Controllers" name="MappingMode">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="Controllers" />
+            <xs:enumeration value="Notes" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" default="Absolute 7 bit" name="ControllerMode">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="Absolute 7 bit" />
+            <xs:enumeration value="Relative signed bit" />
+            <xs:enumeration value="Relative signed bit 2" />
+            <xs:enumeration value="Relative bin offset" />
+            <xs:enumeration value="Relative two's comp" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" default="Value" name="NoteMode">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="Trigger" />
+            <xs:enumeration value="Gate" />
+            <xs:enumeration value="Value" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" default="-1" name="Channel" type="xs:int" />
+      <xs:element minOccurs="0" default="-1" name="CCNumberOrNote" type="xs:int" />
+      <xs:element minOccurs="0" default="0.0" name="Min" type="xs:float" />
+      <xs:element minOccurs="0" default="1.0" name="Max" type="xs:float" />
+    </xs:all>
+    <xs:attribute name="type" type="xs:string" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="RenoiseInstrument">
+    <xs:all>
+      <xs:element minOccurs="0" name="Name" type="xs:string" />
+      <xs:element minOccurs="0" name="SplitMap">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" default="0" name="Split" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" default="0" name="CopyIntoNewSampleNameCounter" type="xs:int" />
+      <xs:element minOccurs="0" default="0" name="CopyIntoNewInstrumentNameCounter" type="xs:int" />
+      <xs:element minOccurs="0" name="Samples">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="Sample" type="InstrumentSample" />
+          </xs:sequence>
+          <xs:attribute name="type" type="xs:string" use="optional" />
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="Envelopes" type="InstrumentEnvelopes" />
+      <xs:element minOccurs="0" name="MidiProperties" type="InstrumentMidiProperties" />
+      <xs:element minOccurs="0" name="PluginProperties" type="InstrumentPluginProperties" />
+    </xs:all>
+    <xs:attribute name="type" type="xs:string" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="InstrumentSample">
+    <xs:all>
+      <xs:element minOccurs="0" name="Name" type="xs:string" />
+      <xs:element minOccurs="0" name="FileName" type="xs:string" />
+      <xs:element minOccurs="0" name="FileModificationDate" type="xs:date" />
+      <xs:element minOccurs="0" name="FileModificationDayTime" type="xs:time" />
+      <xs:element minOccurs="0" default="1.0" name="Volume" type="xs:float" />
+      <xs:element minOccurs="0" default="0.5" name="Panning" type="xs:float" />
+      <xs:element minOccurs="0" default="0" name="Finetune" type="xs:byte" />
+      <xs:element minOccurs="0" default="48" name="BaseNote" type="xs:byte" />
+      <xs:element minOccurs="0" default="false" name="BeatSyncIsActive" type="xs:boolean" />
+      <xs:element minOccurs="0" default="16" name="BeatSyncLines" type="xs:short" />
+      <xs:element minOccurs="0" default="Cut" name="NewNoteAction">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="Cut" />
+            <xs:enumeration value="NoteOff" />
+            <xs:enumeration value="None" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" default="Cubic" name="InterpolationMode">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="None" />
+            <xs:enumeration value="Linear" />
+            <xs:enumeration value="Cubic" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" default="Off" name="LoopMode">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="Off" />
+            <xs:enumeration value="Forward" />
+            <xs:enumeration value="Backward" />
+            <xs:enumeration value="PingPong" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" default="0" name="LoopStart" type="xs:unsignedInt" />
+      <xs:element minOccurs="0" default="0" name="LoopEnd" type="xs:unsignedInt" />
+    </xs:all>
+    <xs:attribute name="type" type="xs:string" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="InstrumentEnvelopes">
+    <xs:all>
+      <xs:element minOccurs="0" name="Volume" type="InstrumentPlayerEnvelope" />
+      <xs:element minOccurs="0" name="Pan" type="InstrumentPlayerEnvelope" />
+      <xs:element minOccurs="0" name="Pitch" type="InstrumentPlayerEnvelope" />
+      <xs:element minOccurs="0" default="3" name="FilterType" type="xs:int" />
+      <xs:element minOccurs="0" name="Cutoff" type="InstrumentFilterEnvelope" />
+      <xs:element minOccurs="0" name="Resonance" type="InstrumentFilterEnvelope" />
+    </xs:all>
+    <xs:attribute name="type" type="xs:string" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="InstrumentPlayerEnvelope">
+    <xs:all>
+      <xs:element minOccurs="0" default="false" name="IsActive" type="xs:boolean" />
+      <xs:element minOccurs="0" default="Curve" name="InterpolationMode">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="Linear" />
+            <xs:enumeration value="Curve" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" default="false" name="SustainIsActive" type="xs:boolean" />
+      <xs:element minOccurs="0" default="0" name="SustainPos" type="xs:int" />
+      <xs:element minOccurs="0" default="0" name="LoopStart" type="xs:int" />
+      <xs:element minOccurs="0" default="71" name="LoopEnd" type="xs:int" />
+      <xs:element minOccurs="0" default="Off" name="LoopMode">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="Off" />
+            <xs:enumeration value="Forward" />
+            <xs:enumeration value="Backward" />
+            <xs:enumeration value="PingPong" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" default="128" name="Decay" type="xs:int" />
+      <xs:element minOccurs="0" name="Nodes" type="Envelope" />
+      <xs:element minOccurs="0" name="Lfo1" type="InstrumentEnvelopeLfo" />
+      <xs:element minOccurs="0" name="Lfo2" type="InstrumentEnvelopeLfo" />
+    </xs:all>
+    <xs:attribute name="type" type="xs:string" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="Envelope">
+    <xs:all>
+      <xs:element minOccurs="0" default="Curve" name="PlayMode">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="Linear" />
+            <xs:enumeration value="Points" />
+            <xs:enumeration value="Curve" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" default="72" name="Length" type="xs:int" />
+      <xs:element minOccurs="0" default="0.0" name="ValueQuantum" type="xs:float" />
+      <xs:element minOccurs="0" default="Unipolar" name="Polarity">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="Unipolar" />
+            <xs:enumeration value="Bipolar" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" name="Points">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" default="0,0.99000000953674316" name="Point" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="type" type="xs:string" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="InstrumentEnvelopeLfo">
+    <xs:all>
+      <xs:element minOccurs="0" default="Off" name="Mode">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="Off" />
+            <xs:enumeration value="Sin" />
+            <xs:enumeration value="Saw" />
+            <xs:enumeration value="Pulse" />
+            <xs:enumeration value="Random" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" default="3" name="Frequency" type="xs:int" />
+      <xs:element minOccurs="0" default="27" name="Amplitude" type="xs:int" />
+      <xs:element minOccurs="0" default="0" name="Dephase" type="xs:int" />
+    </xs:all>
+    <xs:attribute name="type" type="xs:string" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="InstrumentFilterEnvelope">
+    <xs:all>
+      <xs:element minOccurs="0" default="false" name="IsActive" type="xs:boolean" />
+      <xs:element minOccurs="0" default="Curve" name="InterpolationMode">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="Linear" />
+            <xs:enumeration value="Curve" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" default="false" name="SustainIsActive" type="xs:boolean" />
+      <xs:element minOccurs="0" default="0" name="SustainPos" type="xs:int" />
+      <xs:element minOccurs="0" default="0" name="LoopStart" type="xs:int" />
+      <xs:element minOccurs="0" default="71" name="LoopEnd" type="xs:int" />
+      <xs:element minOccurs="0" default="Off" name="LoopMode">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="Off" />
+            <xs:enumeration value="Forward" />
+            <xs:enumeration value="Backward" />
+            <xs:enumeration value="PingPong" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" default="128" name="Decay" type="xs:int" />
+      <xs:element minOccurs="0" name="Nodes" type="Envelope" />
+      <xs:element minOccurs="0" name="Lfo" type="InstrumentEnvelopeLfo" />
+      <xs:element minOccurs="0" name="AutoAmp" type="InstrumentEnvelopeAutoAmp" />
+    </xs:all>
+    <xs:attribute name="type" type="xs:string" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="InstrumentEnvelopeAutoAmp">
+    <xs:all>
+      <xs:element minOccurs="0" default="false" name="IsActive" type="xs:boolean" />
+      <xs:element minOccurs="0" default="100" name="Attack" type="xs:int" />
+      <xs:element minOccurs="0" default="70" name="Release" type="xs:int" />
+      <xs:element minOccurs="0" default="60" name="Amount" type="xs:int" />
+    </xs:all>
+    <xs:attribute name="type" type="xs:string" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="InstrumentMidiProperties">
+    <xs:all>
+      <xs:element minOccurs="0" default="false" name="IsActive" type="xs:boolean" />
+      <xs:element minOccurs="0" default="1" name="Channel" type="xs:byte" />
+      <xs:element minOccurs="0" name="DeviceName" type="xs:string" />
+      <xs:element minOccurs="0" default="ext. MIDI" name="InstrumentType">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="ext. MIDI" />
+            <xs:enumeration value="LineIn Ret" />
+            <xs:enumeration value="int. MIDI" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" default="0" name="Delay" type="xs:int" />
+      <xs:element minOccurs="0" default="-1" name="Program" type="xs:int" />
+      <xs:element minOccurs="0" default="-1" name="Bank" type="xs:int" />
+      <xs:element minOccurs="0" default="48" name="BaseNote" type="xs:int" />
+      <xs:element minOccurs="0" default="8000" name="Length" type="xs:int" />
+    </xs:all>
+    <xs:attribute name="type" type="xs:string" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="InstrumentPluginProperties">
+    <xs:all>
+      <xs:element minOccurs="0" default="1" name="Channel" type="xs:byte" />
+      <xs:element minOccurs="0" default="48" name="BaseNote" type="xs:int" />
+      <xs:element minOccurs="0" default="1.0" name="Volume" type="xs:float" />
+      <xs:element minOccurs="0" name="OutputRoutings">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="OutputRouting" type="InstrumentPluginRouting" />
+          </xs:sequence>
+          <xs:attribute name="type" type="xs:string" use="optional" />
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" default="true" name="AutoSuspend" type="xs:boolean" />
+      <xs:element minOccurs="0" default="-1" name="AliasInstrumentIndex" type="xs:int" />
+      <xs:element minOccurs="0" default="-1,-1" name="AliasFxIndices" type="xs:string" />
+      <xs:element minOccurs="0" name="PluginDevice" type="AudioPluginDevice" />
+    </xs:all>
+    <xs:attribute name="type" type="xs:string" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="InstrumentPluginRouting">
+    <xs:all>
+      <xs:element minOccurs="0" default="true" name="Enabled" type="xs:boolean" />
+      <xs:element minOccurs="0" default="Bus #01" name="Name" type="xs:string" />
+      <xs:element minOccurs="0" default="L+R" name="MixMode">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="L" />
+            <xs:enumeration value="R" />
+            <xs:enumeration value="L+R" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" default="true" name="AutoAssign" type="xs:boolean" />
+      <xs:element minOccurs="0" default="-1" name="AssignedTrack" type="xs:int" />
+    </xs:all>
+    <xs:attribute name="type" type="xs:string" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="AudioPluginDevice">
+    <xs:all>
+      <xs:element minOccurs="0" default="true" name="IsActive" type="xs:boolean" />
+      <xs:element minOccurs="0" default="false" name="IsSelected" type="xs:boolean" />
+      <xs:element minOccurs="0" default="Init" name="SelectedPresetName" type="xs:string" />
+      <xs:element minOccurs="0" default="false" name="SelectedPresetIsModified" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RunTimePresetA" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" name="RunTimePresetB" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" default="true" name="IsMaximized" type="xs:boolean" />
+      <xs:element minOccurs="0" default="0" name="ActiveProgram" type="xs:int" />
+      <xs:element minOccurs="0" name="PluginType">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="AU" />
+            <xs:enumeration value="VST" />
+            <xs:enumeration value="LADSPA" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" name="PluginIdentifier" type="xs:string" />
+      <xs:element minOccurs="0" name="PluginDisplayName" type="xs:string" />
+      <xs:element minOccurs="0" name="PluginShortDisplayName" type="xs:string" />
+      <xs:element minOccurs="0" default="-1,-1" name="PluginEditorWindowPosition" type="xs:string" />
+      <xs:element minOccurs="0" default="Chunk" name="ParameterChunkType">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="Chunk" />
+            <xs:enumeration value="ParameterBag" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="ParameterChunk" type="xs:string" />
+      <xs:element minOccurs="0" name="Parameters">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="Parameter" type="AudioPluginDeviceParameter" />
+          </xs:sequence>
+          <xs:attribute name="type" type="xs:string" use="optional" />
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute fixed="AudioPluginDevice" name="type" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="FilterDevicePreset">
+    <xs:all>
+      <xs:element minOccurs="0" name="DeviceSlot" type="AudioPluginDevice" />
+    </xs:all>
+    <xs:attribute fixed="FilterDevicePreset" name="type" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="AudioPluginDeviceParameter">
+    <xs:all>
+      <xs:element minOccurs="0" default="0.0" name="Value" type="xs:float" />
+      <xs:element minOccurs="0" default="Device only" name="Visualization">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="Dont Show" />
+            <xs:enumeration value="Device only" />
+            <xs:enumeration value="Mixer and Device" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" name="MidiMappings">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="MidiMapping" type="MidiMapping" />
+          </xs:sequence>
+          <xs:attribute name="type" type="xs:string" use="optional" />
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="type" type="xs:string" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="SequencerTrack">
+    <xs:all>
+      <xs:element minOccurs="0" default="Track 01" name="Name" type="xs:string" />
+      <xs:element minOccurs="0" default="140,99,99" name="Color" type="xs:string" />
+      <xs:element minOccurs="0" default="Active" name="State">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="Active" />
+            <xs:enumeration value="Off" />
+            <xs:enumeration value="Mute" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" name="NoteColumnStates">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" default="Active" name="NoteColumnState">
+              <xs:simpleType>
+                <xs:restriction base="xs:string">
+                  <xs:enumeration value="Active" />
+                  <xs:enumeration value="Off" />
+                  <xs:enumeration value="Mute" />
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" default="1" name="NumberOfVisibleNoteColumns" type="xs:int" />
+      <xs:element minOccurs="0" default="1" name="NumberOfVisibleEffectColumns" type="xs:int" />
+      <xs:element minOccurs="0" default="true" name="VolumeColumnIsVisible" type="xs:boolean" />
+      <xs:element minOccurs="0" default="false" name="PanningColumnIsVisible" type="xs:boolean" />
+      <xs:element minOccurs="0" default="false" name="DelayColumnIsVisible" type="xs:boolean" />
+      <xs:element minOccurs="0" default="0" name="TrackRouting" type="xs:int" />
+      <xs:element minOccurs="0" default="0.0" name="TrackDelay" type="xs:float" />
+      <xs:element minOccurs="0" name="FilterDevices" type="SequencerTrackDeviceChain" />
+    </xs:all>
+    <xs:attribute fixed="SequencerTrack" name="type" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="SequencerTrackDeviceChain">
+    <xs:all>               
+      <xs:element minOccurs="0" name="Devices">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+              <xs:element name="AudioPluginDevice" type="AudioPluginDevice" />
+              <xs:element name="BusCompressorDevice" type="BusCompressorDevice" />
+              <xs:element name="CabinetSimulatorDevice" type="CabinetSimulatorDevice" />
+              <xs:element name="ChorusDevice" type="ChorusDevice" />
+              <xs:element name="CompressorDevice" type="CompressorDevice" />
+              <xs:element name="DcOffsetDevice" type="DcOffsetDevice" />
+              <xs:element name="DelayDevice" type="DelayDevice" />
+              <xs:element name="Distortion2Device" type="Distortion2Device" />
+              <xs:element name="DistortionDevice" type="DistortionDevice" />
+              <xs:element name="Eq10Device" type="Eq10Device" />
+              <xs:element name="Eq5Device" type="Eq5Device" />
+              <xs:element name="Filter1Device" type="Filter1Device" />
+              <xs:element name="Filter2Device" type="Filter2Device" />
+              <xs:element name="Filter3Device" type="Filter3Device" />
+              <xs:element name="FilterDistortionDevice" type="FilterDistortionDevice" />
+              <xs:element name="FlangerDevice" type="FlangerDevice" />
+              <xs:element name="GainerDevice" type="GainerDevice" />
+              <xs:element name="Gate2Device" type="Gate2Device" />
+              <xs:element name="GateDevice" type="GateDevice" />
+              <xs:element name="HydraDevice" type="HydraDevice" />
+              <xs:element name="InstrumentAutomationDevice" type="InstrumentAutomationDevice" />
+              <xs:element name="KeyTrackingDevice" type="KeyTrackingDevice" />
+              <xs:element name="LfoDevice" type="LfoDevice" />
+              <xs:element name="LineInDevice" type="LineInDevice" />
+              <xs:element name="Lofi2Device" type="Lofi2Device" />
+              <xs:element name="LofiDevice" type="LofiDevice" />
+              <xs:element name="MaximizerDevice" type="MaximizerDevice" />
+              <xs:element name="MidiCCDevice" type="MidiCCDevice" />
+              <xs:element name="MidiControlDevice" type="MidiControlDevice" />
+              <xs:element name="MixerEqDevice" type="MixerEqDevice" />
+              <xs:element name="PdcTestDelayDevice" type="PdcTestDelayDevice" />
+              <xs:element name="PhaserDevice" type="PhaserDevice" />
+              <xs:element name="Reverb2Device" type="Reverb2Device" />
+              <xs:element name="Reverb3Device" type="Reverb3Device" />
+              <xs:element name="ReverbDevice" type="ReverbDevice" />
+              <xs:element name="RewireInDevice" type="RewireInDevice" />
+              <xs:element name="RingModDevice" type="RingModDevice" />
+              <xs:element name="SendDevice" type="SendDevice" />
+              <xs:element name="SequencerMasterTrackDevice" type="SequencerMasterTrackDevice" />
+              <xs:element name="SequencerSendTrackDevice" type="SequencerSendTrackDevice" />
+              <xs:element name="SequencerTrackDevice" type="SequencerTrackDevice" />
+              <xs:element name="ShaperDevice" type="ShaperDevice" />
+              <xs:element name="SignalFollowerDevice" type="SignalFollowerDevice" />
+              <xs:element name="StereoExpanderDevice" type="StereoExpanderDevice" />
+              <xs:element name="StutterDevice" type="StutterDevice" />
+              <xs:element name="VelocityDevice" type="VelocityDevice" />
+              <xs:element name="XYPadDevice" type="XYPadDevice" />
+            </xs:choice>
+          </xs:sequence>
+          <xs:attribute name="type" type="xs:string" use="optional" />
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="type" type="xs:string" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="BusCompressorDevice">
+    <xs:all>
+      <xs:element minOccurs="0" default="true" name="IsActive" type="xs:boolean" />
+      <xs:element minOccurs="0" default="false" name="IsSelected" type="xs:boolean" />
+      <xs:element minOccurs="0" default="Init" name="SelectedPresetName" type="xs:string" />
+      <xs:element minOccurs="0" default="false" name="SelectedPresetIsModified" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RunTimePresetA" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" name="RunTimePresetB" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" default="true" name="IsMaximized" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Threshold" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Ratio" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Attack" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Release" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="MakeUp" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Knee" type="FilterDeviceParameter" />
+    </xs:all>
+    <xs:attribute fixed="BusCompressorDevice" name="type" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="FilterDeviceParameter">
+    <xs:all>
+      <xs:element minOccurs="0" default="-12" name="Value" type="xs:float" />
+      <xs:element minOccurs="0" default="Device only" name="Visualization">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="Dont Show" />
+            <xs:enumeration value="Device only" />
+            <xs:enumeration value="Mixer and Device" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" name="MidiMappings">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="MidiMapping" type="MidiMapping" />
+          </xs:sequence>
+          <xs:attribute name="type" type="xs:string" use="optional" />
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="type" type="xs:string" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="CabinetSimulatorDevice">
+    <xs:all>
+      <xs:element minOccurs="0" default="true" name="IsActive" type="xs:boolean" />
+      <xs:element minOccurs="0" default="false" name="IsSelected" type="xs:boolean" />
+      <xs:element minOccurs="0" default="Init" name="SelectedPresetName" type="xs:string" />
+      <xs:element minOccurs="0" default="false" name="SelectedPresetIsModified" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RunTimePresetA" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" name="RunTimePresetB" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" default="true" name="IsMaximized" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Cabinet" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Routing" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Distortion" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Wet" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Dry" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" default="true" name="Stereo" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Gain0" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Gain1" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Gain2" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Gain3" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Gain4" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" default="100" name="Frequency0" type="xs:float" />
+      <xs:element minOccurs="0" default="1000" name="Frequency1" type="xs:float" />
+      <xs:element minOccurs="0" default="2000" name="Frequency2" type="xs:float" />
+      <xs:element minOccurs="0" default="4000" name="Frequency3" type="xs:float" />
+      <xs:element minOccurs="0" default="8000" name="Frequency4" type="xs:float" />
+      <xs:element minOccurs="0" default="1.0" name="BandWidth0" type="xs:float" />
+      <xs:element minOccurs="0" default="2" name="BandWidth1" type="xs:float" />
+      <xs:element minOccurs="0" default="2" name="BandWidth2" type="xs:float" />
+      <xs:element minOccurs="0" default="2" name="BandWidth3" type="xs:float" />
+      <xs:element minOccurs="0" default="1.0" name="BandWidth4" type="xs:float" />
+    </xs:all>
+    <xs:attribute fixed="CabinetSimulatorDevice" name="type" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="ChorusDevice">
+    <xs:all>
+      <xs:element minOccurs="0" default="true" name="IsActive" type="xs:boolean" />
+      <xs:element minOccurs="0" default="false" name="IsSelected" type="xs:boolean" />
+      <xs:element minOccurs="0" default="Init" name="SelectedPresetName" type="xs:string" />
+      <xs:element minOccurs="0" default="false" name="SelectedPresetIsModified" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RunTimePresetA" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" name="RunTimePresetB" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" default="true" name="IsMaximized" type="xs:boolean" />
+      <xs:element minOccurs="0" name="LfoRate" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="LfoDepth" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Feedback" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Delay" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="DryWetMix" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Phase" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="FilterType" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="FilterFreq" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="FilterResonance" type="FilterDeviceParameter" />
+    </xs:all>
+    <xs:attribute fixed="ChorusDevice" name="type" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="CompressorDevice">
+    <xs:all>
+      <xs:element minOccurs="0" default="true" name="IsActive" type="xs:boolean" />
+      <xs:element minOccurs="0" default="false" name="IsSelected" type="xs:boolean" />
+      <xs:element minOccurs="0" default="Init" name="SelectedPresetName" type="xs:string" />
+      <xs:element minOccurs="0" default="false" name="SelectedPresetIsModified" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RunTimePresetA" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" name="RunTimePresetB" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" default="true" name="IsMaximized" type="xs:boolean" />
+      <xs:element minOccurs="0" name="LogThreshold" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Ratio" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Attack" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Release" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Gain" type="FilterDeviceParameter" />
+    </xs:all>
+    <xs:attribute fixed="CompressorDevice" name="type" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="DcOffsetDevice">
+    <xs:all>
+      <xs:element minOccurs="0" default="true" name="IsActive" type="xs:boolean" />
+      <xs:element minOccurs="0" default="false" name="IsSelected" type="xs:boolean" />
+      <xs:element minOccurs="0" default="Init" name="SelectedPresetName" type="xs:string" />
+      <xs:element minOccurs="0" default="false" name="SelectedPresetIsModified" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RunTimePresetA" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" name="RunTimePresetB" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" default="true" name="IsMaximized" type="xs:boolean" />
+      <xs:element minOccurs="0" name="DCOffset" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="AutoDC" type="FilterDeviceParameter" />
+    </xs:all>
+    <xs:attribute fixed="DcOffsetDevice" name="type" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="DelayDevice">
+    <xs:all>
+      <xs:element minOccurs="0" default="true" name="IsActive" type="xs:boolean" />
+      <xs:element minOccurs="0" default="false" name="IsSelected" type="xs:boolean" />
+      <xs:element minOccurs="0" default="Init" name="SelectedPresetName" type="xs:string" />
+      <xs:element minOccurs="0" default="false" name="SelectedPresetIsModified" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RunTimePresetA" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" name="RunTimePresetB" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" default="true" name="IsMaximized" type="xs:boolean" />
+      <xs:element minOccurs="0" name="LDelay" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="RDelay" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="LFeedback" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="RFeedback" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="TrackSend" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="LineSync" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="LTapPan" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="RTapPan" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="MuteDrySignal" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="LSyncTime" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="RSyncTime" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="LSyncOffset" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="RSyncOffset" type="FilterDeviceParameter" />
+    </xs:all>
+    <xs:attribute fixed="DelayDevice" name="type" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="Distortion2Device">
+    <xs:all>
+      <xs:element minOccurs="0" default="true" name="IsActive" type="xs:boolean" />
+      <xs:element minOccurs="0" default="false" name="IsSelected" type="xs:boolean" />
+      <xs:element minOccurs="0" default="Init" name="SelectedPresetName" type="xs:string" />
+      <xs:element minOccurs="0" default="false" name="SelectedPresetIsModified" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RunTimePresetA" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" name="RunTimePresetB" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" default="true" name="IsMaximized" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Type" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Drive" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Tone" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="WetOut" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="DryOut" type="FilterDeviceParameter" />
+    </xs:all>
+    <xs:attribute fixed="Distortion2Device" name="type" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="DistortionDevice">
+    <xs:all>
+      <xs:element minOccurs="0" default="true" name="IsActive" type="xs:boolean" />
+      <xs:element minOccurs="0" default="false" name="IsSelected" type="xs:boolean" />
+      <xs:element minOccurs="0" default="Init" name="SelectedPresetName" type="xs:string" />
+      <xs:element minOccurs="0" default="false" name="SelectedPresetIsModified" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RunTimePresetA" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" name="RunTimePresetB" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" default="true" name="IsMaximized" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Threshold" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="LpOrClamp" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="WetOut" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="DryOut" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="GateOrFilter" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Type" type="FilterDeviceParameter" />
+    </xs:all>
+    <xs:attribute fixed="DistortionDevice" name="type" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="Eq10Device">
+    <xs:all>
+      <xs:element minOccurs="0" default="true" name="IsActive" type="xs:boolean" />
+      <xs:element minOccurs="0" default="false" name="IsSelected" type="xs:boolean" />
+      <xs:element minOccurs="0" default="Init" name="SelectedPresetName" type="xs:string" />
+      <xs:element minOccurs="0" default="false" name="SelectedPresetIsModified" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RunTimePresetA" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" name="RunTimePresetB" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" default="true" name="IsMaximized" type="xs:boolean" />
+      <xs:element minOccurs="0" default="L+R" name="InputMode">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="L" />
+            <xs:enumeration value="R" />
+            <xs:enumeration value="L-R" />
+            <xs:enumeration value="L+R" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" default="20" name="MaxVisualizedGain" type="xs:float" />
+      <xs:element minOccurs="0" name="Gain0" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Gain1" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Gain2" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Gain3" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Gain4" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Gain5" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Gain6" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Gain7" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Gain8" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Gain9" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" default="50" name="Frequency0" type="xs:float" />
+      <xs:element minOccurs="0" default="100" name="Frequency1" type="xs:float" />
+      <xs:element minOccurs="0" default="300" name="Frequency2" type="xs:float" />
+      <xs:element minOccurs="0" default="600" name="Frequency3" type="xs:float" />
+      <xs:element minOccurs="0" default="1200" name="Frequency4" type="xs:float" />
+      <xs:element minOccurs="0" default="2000" name="Frequency5" type="xs:float" />
+      <xs:element minOccurs="0" default="3000.25" name="Frequency6" type="xs:float" />
+      <xs:element minOccurs="0" default="5000" name="Frequency7" type="xs:float" />
+      <xs:element minOccurs="0" default="10000" name="Frequency8" type="xs:float" />
+      <xs:element minOccurs="0" default="15000" name="Frequency9" type="xs:float" />
+      <xs:element minOccurs="0" default="1.0" name="BandWidth0" type="xs:float" />
+      <xs:element minOccurs="0" default="2" name="BandWidth1" type="xs:float" />
+      <xs:element minOccurs="0" default="2" name="BandWidth2" type="xs:float" />
+      <xs:element minOccurs="0" default="2" name="BandWidth3" type="xs:float" />
+      <xs:element minOccurs="0" default="2" name="BandWidth4" type="xs:float" />
+      <xs:element minOccurs="0" default="2" name="BandWidth5" type="xs:float" />
+      <xs:element minOccurs="0" default="2" name="BandWidth6" type="xs:float" />
+      <xs:element minOccurs="0" default="2" name="BandWidth7" type="xs:float" />
+      <xs:element minOccurs="0" default="2" name="BandWidth8" type="xs:float" />
+      <xs:element minOccurs="0" default="1.0" name="BandWidth9" type="xs:float" />
+    </xs:all>
+    <xs:attribute fixed="Eq10Device" name="type" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="Eq5Device">
+    <xs:all>
+      <xs:element minOccurs="0" default="true" name="IsActive" type="xs:boolean" />
+      <xs:element minOccurs="0" default="false" name="IsSelected" type="xs:boolean" />
+      <xs:element minOccurs="0" default="Init" name="SelectedPresetName" type="xs:string" />
+      <xs:element minOccurs="0" default="false" name="SelectedPresetIsModified" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RunTimePresetA" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" name="RunTimePresetB" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" default="true" name="IsMaximized" type="xs:boolean" />
+      <xs:element minOccurs="0" default="L+R" name="InputMode">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="L" />
+            <xs:enumeration value="R" />
+            <xs:enumeration value="L-R" />
+            <xs:enumeration value="L+R" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" default="20" name="MaxVisualizedGain" type="xs:float" />
+      <xs:element minOccurs="0" name="Gain0" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Gain1" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Gain2" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Gain3" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Gain4" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" default="100" name="Frequency0" type="xs:float" />
+      <xs:element minOccurs="0" default="1000" name="Frequency1" type="xs:float" />
+      <xs:element minOccurs="0" default="4000" name="Frequency2" type="xs:float" />
+      <xs:element minOccurs="0" default="8000" name="Frequency3" type="xs:float" />
+      <xs:element minOccurs="0" default="12000" name="Frequency4" type="xs:float" />
+      <xs:element minOccurs="0" default="1.0" name="BandWidth0" type="xs:float" />
+      <xs:element minOccurs="0" default="4" name="BandWidth1" type="xs:float" />
+      <xs:element minOccurs="0" default="4" name="BandWidth2" type="xs:float" />
+      <xs:element minOccurs="0" default="4" name="BandWidth3" type="xs:float" />
+      <xs:element minOccurs="0" default="1.0" name="BandWidth4" type="xs:float" />
+    </xs:all>
+    <xs:attribute fixed="Eq5Device" name="type" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="Filter1Device">
+    <xs:all>
+      <xs:element minOccurs="0" default="true" name="IsActive" type="xs:boolean" />
+      <xs:element minOccurs="0" default="false" name="IsSelected" type="xs:boolean" />
+      <xs:element minOccurs="0" default="Init" name="SelectedPresetName" type="xs:string" />
+      <xs:element minOccurs="0" default="false" name="SelectedPresetIsModified" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RunTimePresetA" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" name="RunTimePresetB" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" default="true" name="IsMaximized" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Cutoff" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Resonance" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Innertia" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Type" type="FilterDeviceParameter" />
+    </xs:all>
+    <xs:attribute fixed="Filter1Device" name="type" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="Filter2Device">
+    <xs:all>
+      <xs:element minOccurs="0" default="true" name="IsActive" type="xs:boolean" />
+      <xs:element minOccurs="0" default="false" name="IsSelected" type="xs:boolean" />
+      <xs:element minOccurs="0" default="Init" name="SelectedPresetName" type="xs:string" />
+      <xs:element minOccurs="0" default="false" name="SelectedPresetIsModified" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RunTimePresetA" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" name="RunTimePresetB" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" default="true" name="IsMaximized" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Cutoff" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Resonance" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Innertia" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Type" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" default="true" name="LimitMoogFilterOutput" type="xs:boolean" />
+    </xs:all>
+    <xs:attribute fixed="Filter2Device" name="type" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="Filter3Device">
+    <xs:all>
+      <xs:element minOccurs="0" default="true" name="IsActive" type="xs:boolean" />
+      <xs:element minOccurs="0" default="false" name="IsSelected" type="xs:boolean" />
+      <xs:element minOccurs="0" default="Init" name="SelectedPresetName" type="xs:string" />
+      <xs:element minOccurs="0" default="false" name="SelectedPresetIsModified" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RunTimePresetA" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" name="RunTimePresetB" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" default="true" name="IsMaximized" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Type" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Frequency" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Q" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Gain" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Inertia" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" default="24dB 4Pole" name="Model">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="24dB 4Pole" />
+            <xs:enumeration value="24dB Moog" />
+            <xs:enumeration value="Butterworth 4n" />
+            <xs:enumeration value="Butterworth 8n" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute fixed="Filter3Device" name="type" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="FilterDistortionDevice">
+    <xs:all>
+      <xs:element minOccurs="0" default="true" name="IsActive" type="xs:boolean" />
+      <xs:element minOccurs="0" default="false" name="IsSelected" type="xs:boolean" />
+      <xs:element minOccurs="0" default="Init" name="SelectedPresetName" type="xs:string" />
+      <xs:element minOccurs="0" default="false" name="SelectedPresetIsModified" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RunTimePresetA" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" name="RunTimePresetB" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" default="true" name="IsMaximized" type="xs:boolean" />
+      <xs:element minOccurs="0" name="FilterType" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Drive" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Cutoff" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Resonance" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Inertia" type="FilterDeviceParameter" />
+    </xs:all>
+    <xs:attribute fixed="FilterDistortionDevice" name="type" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="FlangerDevice">
+    <xs:all>
+      <xs:element minOccurs="0" default="true" name="IsActive" type="xs:boolean" />
+      <xs:element minOccurs="0" default="false" name="IsSelected" type="xs:boolean" />
+      <xs:element minOccurs="0" default="Init" name="SelectedPresetName" type="xs:string" />
+      <xs:element minOccurs="0" default="false" name="SelectedPresetIsModified" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RunTimePresetA" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" name="RunTimePresetB" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" default="true" name="IsMaximized" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Amount" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Rate" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Amplitude" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="FeedBack" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Delay" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Dephase" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="FilterType" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="FilterFreq" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="FilterResonance" type="FilterDeviceParameter" />
+    </xs:all>
+    <xs:attribute fixed="FlangerDevice" name="type" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="GainerDevice">
+    <xs:all>
+      <xs:element minOccurs="0" default="true" name="IsActive" type="xs:boolean" />
+      <xs:element minOccurs="0" default="false" name="IsSelected" type="xs:boolean" />
+      <xs:element minOccurs="0" default="Init" name="SelectedPresetName" type="xs:string" />
+      <xs:element minOccurs="0" default="false" name="SelectedPresetIsModified" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RunTimePresetA" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" name="RunTimePresetB" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" default="true" name="IsMaximized" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Volume" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Panning" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" default="false" name="LPhaseInvert" type="xs:boolean" />
+      <xs:element minOccurs="0" default="false" name="RPhaseInvert" type="xs:boolean" />
+    </xs:all>
+    <xs:attribute fixed="GainerDevice" name="type" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="Gate2Device">
+    <xs:all>
+      <xs:element minOccurs="0" default="true" name="IsActive" type="xs:boolean" />
+      <xs:element minOccurs="0" default="false" name="IsSelected" type="xs:boolean" />
+      <xs:element minOccurs="0" default="Init" name="SelectedPresetName" type="xs:string" />
+      <xs:element minOccurs="0" default="false" name="SelectedPresetIsModified" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RunTimePresetA" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" name="RunTimePresetB" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" default="true" name="IsMaximized" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Threshold" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Attack" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Hold" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Release" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Floor" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" default="false" name="ListenToSideChain" type="xs:boolean" />
+      <xs:element minOccurs="0" name="SideChainHpFreq" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="SideChainLpFreq" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Type" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="MixMode" type="FilterDeviceParameter" />
+    </xs:all>
+    <xs:attribute fixed="Gate2Device" name="type" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="GateDevice">
+    <xs:all>
+      <xs:element minOccurs="0" default="true" name="IsActive" type="xs:boolean" />
+      <xs:element minOccurs="0" default="false" name="IsSelected" type="xs:boolean" />
+      <xs:element minOccurs="0" default="Init" name="SelectedPresetName" type="xs:string" />
+      <xs:element minOccurs="0" default="false" name="SelectedPresetIsModified" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RunTimePresetA" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" name="RunTimePresetB" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" default="true" name="IsMaximized" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Threshold" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="AttackInMs" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="HoldInMs" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="ReleaseInMs" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="GatedVolume" type="FilterDeviceParameter" />
+    </xs:all>
+    <xs:attribute fixed="GateDevice" name="type" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="HydraDevice">
+    <xs:all>
+      <xs:element minOccurs="0" default="true" name="IsActive" type="xs:boolean" />
+      <xs:element minOccurs="0" default="false" name="IsSelected" type="xs:boolean" />
+      <xs:element minOccurs="0" default="Init" name="SelectedPresetName" type="xs:string" />
+      <xs:element minOccurs="0" default="false" name="SelectedPresetIsModified" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RunTimePresetA" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" name="RunTimePresetB" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" default="true" name="IsMaximized" type="xs:boolean" />
+      <xs:element minOccurs="0" default="1" name="VisiblePages" type="xs:int" />
+      <xs:element minOccurs="0" name="InputValue" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Out1DestTrack" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Out1DestEffect" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Out1DestParameter" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Out1Min" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Out1Max" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" default="Linear" name="Out1Scaling">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="Log Fast" />
+            <xs:enumeration value="Log Slow" />
+            <xs:enumeration value="Linear" />
+            <xs:enumeration value="Exp Slow" />
+            <xs:enumeration value="Exp Fast" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" name="Out2DestTrack" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Out2DestEffect" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Out2DestParameter" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Out2Min" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Out2Max" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" default="Linear" name="Out2Scaling">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="Log Fast" />
+            <xs:enumeration value="Log Slow" />
+            <xs:enumeration value="Linear" />
+            <xs:enumeration value="Exp Slow" />
+            <xs:enumeration value="Exp Fast" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" name="Out3DestTrack" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Out3DestEffect" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Out3DestParameter" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Out3Min" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Out3Max" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" default="Linear" name="Out3Scaling">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="Log Fast" />
+            <xs:enumeration value="Log Slow" />
+            <xs:enumeration value="Linear" />
+            <xs:enumeration value="Exp Slow" />
+            <xs:enumeration value="Exp Fast" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" name="Out4DestTrack" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Out4DestEffect" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Out4DestParameter" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Out4Min" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Out4Max" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" default="Linear" name="Out4Scaling">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="Log Fast" />
+            <xs:enumeration value="Log Slow" />
+            <xs:enumeration value="Linear" />
+            <xs:enumeration value="Exp Slow" />
+            <xs:enumeration value="Exp Fast" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" name="Out5DestTrack" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Out5DestEffect" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Out5DestParameter" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Out5Min" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Out5Max" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" default="Linear" name="Out5Scaling">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="Log Fast" />
+            <xs:enumeration value="Log Slow" />
+            <xs:enumeration value="Linear" />
+            <xs:enumeration value="Exp Slow" />
+            <xs:enumeration value="Exp Fast" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" name="Out6DestTrack" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Out6DestEffect" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Out6DestParameter" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Out6Min" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Out6Max" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" default="Linear" name="Out6Scaling">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="Log Fast" />
+            <xs:enumeration value="Log Slow" />
+            <xs:enumeration value="Linear" />
+            <xs:enumeration value="Exp Slow" />
+            <xs:enumeration value="Exp Fast" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" name="Out7DestTrack" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Out7DestEffect" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Out7DestParameter" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Out7Min" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Out7Max" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" default="Linear" name="Out7Scaling">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="Log Fast" />
+            <xs:enumeration value="Log Slow" />
+            <xs:enumeration value="Linear" />
+            <xs:enumeration value="Exp Slow" />
+            <xs:enumeration value="Exp Fast" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" name="Out8DestTrack" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Out8DestEffect" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Out8DestParameter" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Out8Min" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Out8Max" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" default="Linear" name="Out8Scaling">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="Log Fast" />
+            <xs:enumeration value="Log Slow" />
+            <xs:enumeration value="Linear" />
+            <xs:enumeration value="Exp Slow" />
+            <xs:enumeration value="Exp Fast" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" name="Out9DestTrack" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Out9DestEffect" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Out9DestParameter" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Out9Min" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Out9Max" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" default="Linear" name="Out9Scaling">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="Log Fast" />
+            <xs:enumeration value="Log Slow" />
+            <xs:enumeration value="Linear" />
+            <xs:enumeration value="Exp Slow" />
+            <xs:enumeration value="Exp Fast" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute fixed="HydraDevice" name="type" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="InstrumentAutomationDevice">
+    <xs:all>
+      <xs:element minOccurs="0" default="true" name="IsActive" type="xs:boolean" />
+      <xs:element minOccurs="0" default="false" name="IsSelected" type="xs:boolean" />
+      <xs:element minOccurs="0" default="Init" name="SelectedPresetName" type="xs:string" />
+      <xs:element minOccurs="0" default="true" name="SelectedPresetIsModified" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RunTimePresetA" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" name="RunTimePresetB" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" default="true" name="IsMaximized" type="xs:boolean" />
+      <xs:element minOccurs="0" default="0" name="ParameterNumber0" type="xs:int" />
+      <xs:element minOccurs="0" name="ParameterValue0" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" default="1" name="ParameterNumber1" type="xs:int" />
+      <xs:element minOccurs="0" name="ParameterValue1" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" default="2" name="ParameterNumber2" type="xs:int" />
+      <xs:element minOccurs="0" name="ParameterValue2" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" default="3" name="ParameterNumber3" type="xs:int" />
+      <xs:element minOccurs="0" name="ParameterValue3" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" default="4" name="ParameterNumber4" type="xs:int" />
+      <xs:element minOccurs="0" name="ParameterValue4" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" default="5" name="ParameterNumber5" type="xs:int" />
+      <xs:element minOccurs="0" name="ParameterValue5" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" default="6" name="ParameterNumber6" type="xs:int" />
+      <xs:element minOccurs="0" name="ParameterValue6" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" default="7" name="ParameterNumber7" type="xs:int" />
+      <xs:element minOccurs="0" name="ParameterValue7" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" default="8" name="ParameterNumber8" type="xs:int" />
+      <xs:element minOccurs="0" name="ParameterValue8" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" default="9" name="ParameterNumber9" type="xs:int" />
+      <xs:element minOccurs="0" name="ParameterValue9" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" default="10" name="ParameterNumber10" type="xs:int" />
+      <xs:element minOccurs="0" name="ParameterValue10" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" default="11" name="ParameterNumber11" type="xs:int" />
+      <xs:element minOccurs="0" name="ParameterValue11" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" default="12" name="ParameterNumber12" type="xs:int" />
+      <xs:element minOccurs="0" name="ParameterValue12" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" default="13" name="ParameterNumber13" type="xs:int" />
+      <xs:element minOccurs="0" name="ParameterValue13" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" default="0" name="LinkedInstrument" type="xs:int" />
+      <xs:element minOccurs="0" default="1" name="VisiblePages" type="xs:int" />
+    </xs:all>
+    <xs:attribute fixed="InstrumentAutomationDevice" name="type" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="KeyTrackingDevice">
+    <xs:all>
+      <xs:element minOccurs="0" default="true" name="IsActive" type="xs:boolean" />
+      <xs:element minOccurs="0" default="false" name="IsSelected" type="xs:boolean" />
+      <xs:element minOccurs="0" default="Init" name="SelectedPresetName" type="xs:string" />
+      <xs:element minOccurs="0" default="false" name="SelectedPresetIsModified" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RunTimePresetA" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" name="RunTimePresetB" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" default="true" name="IsMaximized" type="xs:boolean" />
+      <xs:element minOccurs="0" default="-1" name="SrcInstrument" type="xs:int" />
+      <xs:element minOccurs="0" default="Linear" name="DestScaling">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="Log Fast" />
+            <xs:enumeration value="Log Slow" />
+            <xs:enumeration value="Linear" />
+            <xs:enumeration value="Exp Slow" />
+            <xs:enumeration value="Exp Fast" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" default="Clamp" name="KeyTrackingMode">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="Clamp" />
+            <xs:enumeration value="Soft" />
+            <xs:enumeration value="Octave" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" default="36" name="KeyTrackingMin" type="xs:int" />
+      <xs:element minOccurs="0" default="72" name="KeyTrackingMax" type="xs:int" />
+      <xs:element minOccurs="0" name="DestTrack" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="DestEffect" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="DestParameter" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="DestMin" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="DestMax" type="FilterDeviceParameter" />
+    </xs:all>
+    <xs:attribute fixed="KeyTrackingDevice" name="type" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="LfoDevice">
+    <xs:all>
+      <xs:element minOccurs="0" default="true" name="IsActive" type="xs:boolean" />
+      <xs:element minOccurs="0" default="false" name="IsSelected" type="xs:boolean" />
+      <xs:element minOccurs="0" default="Init" name="SelectedPresetName" type="xs:string" />
+      <xs:element minOccurs="0" default="false" name="SelectedPresetIsModified" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RunTimePresetA" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" name="RunTimePresetB" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" default="true" name="IsMaximized" type="xs:boolean" />
+      <xs:element minOccurs="0" name="DestTrack" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="DestEffect" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="DestParameter" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Amplitude" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Offset" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Frequency" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Type" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="CustomEnvelope" type="Envelope" />
+      <xs:element minOccurs="0" default="false" name="CustomEnvelopeOneShot" type="xs:boolean" />
+    </xs:all>
+    <xs:attribute fixed="LfoDevice" name="type" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="LineInDevice">
+    <xs:all>
+      <xs:element minOccurs="0" default="true" name="IsActive" type="xs:boolean" />
+      <xs:element minOccurs="0" default="false" name="IsSelected" type="xs:boolean" />
+      <xs:element minOccurs="0" default="Init" name="SelectedPresetName" type="xs:string" />
+      <xs:element minOccurs="0" default="false" name="SelectedPresetIsModified" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RunTimePresetA" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" name="RunTimePresetB" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" default="true" name="IsMaximized" type="xs:boolean" />
+      <xs:element minOccurs="0" default="0" name="InputChannel" type="xs:int" />
+      <xs:element minOccurs="0" default="L+R" name="InputChannelMode">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="L" />
+            <xs:enumeration value="R" />
+            <xs:enumeration value="L+R" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" default="Live Recording Mode" name="InputLatencyMode">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="Live Recording Mode" />
+            <xs:enumeration value="MIDI Return Mode" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" name="Panning" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Volume" type="FilterDeviceParameter" />
+    </xs:all>
+    <xs:attribute fixed="LineInDevice" name="type" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="Lofi2Device">
+    <xs:all>
+      <xs:element minOccurs="0" default="true" name="IsActive" type="xs:boolean" />
+      <xs:element minOccurs="0" default="false" name="IsSelected" type="xs:boolean" />
+      <xs:element minOccurs="0" default="Init" name="SelectedPresetName" type="xs:string" />
+      <xs:element minOccurs="0" default="false" name="SelectedPresetIsModified" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RunTimePresetA" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" name="RunTimePresetB" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" default="true" name="IsMaximized" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Bits" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Rate" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Noise" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="WetOut" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="DryOut" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Interpolate" type="FilterDeviceParameter" />
+    </xs:all>
+    <xs:attribute fixed="Lofi2Device" name="type" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="LofiDevice">
+    <xs:all>
+      <xs:element minOccurs="0" default="true" name="IsActive" type="xs:boolean" />
+      <xs:element minOccurs="0" default="false" name="IsSelected" type="xs:boolean" />
+      <xs:element minOccurs="0" default="Init" name="SelectedPresetName" type="xs:string" />
+      <xs:element minOccurs="0" default="false" name="SelectedPresetIsModified" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RunTimePresetA" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" name="RunTimePresetB" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" default="true" name="IsMaximized" type="xs:boolean" />
+      <xs:element minOccurs="0" name="BitCrunsh" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Quality" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Noise" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="WetOut" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="DryOut" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Interpolate" type="FilterDeviceParameter" />
+    </xs:all>
+    <xs:attribute fixed="LofiDevice" name="type" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="MaximizerDevice">
+    <xs:all>
+      <xs:element minOccurs="0" default="true" name="IsActive" type="xs:boolean" />
+      <xs:element minOccurs="0" default="false" name="IsSelected" type="xs:boolean" />
+      <xs:element minOccurs="0" default="Init" name="SelectedPresetName" type="xs:string" />
+      <xs:element minOccurs="0" default="false" name="SelectedPresetIsModified" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RunTimePresetA" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" name="RunTimePresetB" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" default="true" name="IsMaximized" type="xs:boolean" />
+      <xs:element minOccurs="0" name="InputGain" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Threshold" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="TransientRelease" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="LongTermRelease" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Ceiling" type="FilterDeviceParameter" />
+    </xs:all>
+    <xs:attribute fixed="MaximizerDevice" name="type" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="MidiCCDevice">
+    <xs:all>
+      <xs:element minOccurs="0" default="true" name="IsActive" type="xs:boolean" />
+      <xs:element minOccurs="0" default="false" name="IsSelected" type="xs:boolean" />
+      <xs:element minOccurs="0" default="Init" name="SelectedPresetName" type="xs:string" />
+      <xs:element minOccurs="0" default="true" name="SelectedPresetIsModified" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RunTimePresetA" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" name="RunTimePresetB" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" default="true" name="IsMaximized" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ControllerValue0" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" default="-1" name="ControllerNumber0" type="xs:int" />
+      <xs:element minOccurs="0" default="Untitled" name="ControllerName0" type="xs:string" />
+      <xs:element minOccurs="0" name="ControllerValue1" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" default="-1" name="ControllerNumber1" type="xs:int" />
+      <xs:element minOccurs="0" default="Untitled" name="ControllerName1" type="xs:string" />
+      <xs:element minOccurs="0" name="ControllerValue2" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" default="-1" name="ControllerNumber2" type="xs:int" />
+      <xs:element minOccurs="0" default="Untitled" name="ControllerName2" type="xs:string" />
+      <xs:element minOccurs="0" name="ControllerValue3" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" default="-1" name="ControllerNumber3" type="xs:int" />
+      <xs:element minOccurs="0" default="Untitled" name="ControllerName3" type="xs:string" />
+      <xs:element minOccurs="0" name="ControllerValue4" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" default="-1" name="ControllerNumber4" type="xs:int" />
+      <xs:element minOccurs="0" default="Untitled" name="ControllerName4" type="xs:string" />
+      <xs:element minOccurs="0" name="ControllerValue5" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" default="-1" name="ControllerNumber5" type="xs:int" />
+      <xs:element minOccurs="0" default="Untitled" name="ControllerName5" type="xs:string" />
+      <xs:element minOccurs="0" name="ControllerValue6" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" default="-1" name="ControllerNumber6" type="xs:int" />
+      <xs:element minOccurs="0" default="Untitled" name="ControllerName6" type="xs:string" />
+      <xs:element minOccurs="0" name="ControllerValue7" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" default="-1" name="ControllerNumber7" type="xs:int" />
+      <xs:element minOccurs="0" default="Untitled" name="ControllerName7" type="xs:string" />
+      <xs:element minOccurs="0" name="ControllerValue8" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" default="-1" name="ControllerNumber8" type="xs:int" />
+      <xs:element minOccurs="0" default="Untitled" name="ControllerName8" type="xs:string" />
+      <xs:element minOccurs="0" name="ControllerValue9" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" default="-1" name="ControllerNumber9" type="xs:int" />
+      <xs:element minOccurs="0" default="Untitled" name="ControllerName9" type="xs:string" />
+      <xs:element minOccurs="0" name="ControllerValue10" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" default="-1" name="ControllerNumber10" type="xs:int" />
+      <xs:element minOccurs="0" default="Untitled" name="ControllerName10" type="xs:string" />
+      <xs:element minOccurs="0" name="ControllerValue11" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" default="-1" name="ControllerNumber11" type="xs:int" />
+      <xs:element minOccurs="0" default="Untitled" name="ControllerName11" type="xs:string" />
+      <xs:element minOccurs="0" name="ControllerValue12" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" default="-1" name="ControllerNumber12" type="xs:int" />
+      <xs:element minOccurs="0" default="Untitled" name="ControllerName12" type="xs:string" />
+      <xs:element minOccurs="0" name="ControllerValue13" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" default="-1" name="ControllerNumber13" type="xs:int" />
+      <xs:element minOccurs="0" default="Untitled" name="ControllerName13" type="xs:string" />
+      <xs:element minOccurs="0" default="0" name="LinkedInstrument" type="xs:int" />
+      <xs:element minOccurs="0" default="1" name="VisiblePages" type="xs:int" />
+    </xs:all>
+    <xs:attribute fixed="MidiCCDevice" name="type" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="MidiControlDevice">
+    <xs:all>
+      <xs:element minOccurs="0" default="true" name="IsActive" type="xs:boolean" />
+      <xs:element minOccurs="0" default="false" name="IsSelected" type="xs:boolean" />
+      <xs:element minOccurs="0" default="Init" name="SelectedPresetName" type="xs:string" />
+      <xs:element minOccurs="0" default="true" name="SelectedPresetIsModified" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RunTimePresetA" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" name="RunTimePresetB" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" default="true" name="IsMaximized" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ControllerValue0" type="MidiControlDeviceFilterDeviceParameter" />
+      <xs:element minOccurs="0" default="-1" name="ControllerNumber0" type="xs:int" />
+      <xs:element minOccurs="0" default="Untitled" name="ControllerName0" type="xs:string" />
+      <xs:element minOccurs="0" default="PB" name="ControllerType0">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="PB" />
+            <xs:enumeration value="CP" />
+            <xs:enumeration value="CC" />
+            <xs:enumeration value="Prg" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" name="ControllerValue1" type="MidiControlDeviceFilterDeviceParameter" />
+      <xs:element minOccurs="0" default="-1" name="ControllerNumber1" type="xs:int" />
+      <xs:element minOccurs="0" default="Untitled" name="ControllerName1" type="xs:string" />
+      <xs:element minOccurs="0" default="CP" name="ControllerType1">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="PB" />
+            <xs:enumeration value="CP" />
+            <xs:enumeration value="CC" />
+            <xs:enumeration value="Prg" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" name="ControllerValue2" type="MidiControlDeviceFilterDeviceParameter" />
+      <xs:element minOccurs="0" default="-1" name="ControllerNumber2" type="xs:int" />
+      <xs:element minOccurs="0" default="Untitled" name="ControllerName2" type="xs:string" />
+      <xs:element minOccurs="0" default="CC" name="ControllerType2">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="PB" />
+            <xs:enumeration value="CP" />
+            <xs:enumeration value="CC" />
+            <xs:enumeration value="Prg" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" name="ControllerValue3" type="MidiControlDeviceFilterDeviceParameter" />
+      <xs:element minOccurs="0" default="-1" name="ControllerNumber3" type="xs:int" />
+      <xs:element minOccurs="0" default="Untitled" name="ControllerName3" type="xs:string" />
+      <xs:element minOccurs="0" default="CC" name="ControllerType3">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="PB" />
+            <xs:enumeration value="CP" />
+            <xs:enumeration value="CC" />
+            <xs:enumeration value="Prg" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" name="ControllerValue4" type="MidiControlDeviceFilterDeviceParameter" />
+      <xs:element minOccurs="0" default="-1" name="ControllerNumber4" type="xs:int" />
+      <xs:element minOccurs="0" default="Untitled" name="ControllerName4" type="xs:string" />
+      <xs:element minOccurs="0" default="CC" name="ControllerType4">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="PB" />
+            <xs:enumeration value="CP" />
+            <xs:enumeration value="CC" />
+            <xs:enumeration value="Prg" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" name="ControllerValue5" type="MidiControlDeviceFilterDeviceParameter" />
+      <xs:element minOccurs="0" default="-1" name="ControllerNumber5" type="xs:int" />
+      <xs:element minOccurs="0" default="Untitled" name="ControllerName5" type="xs:string" />
+      <xs:element minOccurs="0" default="CC" name="ControllerType5">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="PB" />
+            <xs:enumeration value="CP" />
+            <xs:enumeration value="CC" />
+            <xs:enumeration value="Prg" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" name="ControllerValue6" type="MidiControlDeviceFilterDeviceParameter" />
+      <xs:element minOccurs="0" default="-1" name="ControllerNumber6" type="xs:int" />
+      <xs:element minOccurs="0" default="Untitled" name="ControllerName6" type="xs:string" />
+      <xs:element minOccurs="0" default="CC" name="ControllerType6">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="PB" />
+            <xs:enumeration value="CP" />
+            <xs:enumeration value="CC" />
+            <xs:enumeration value="Prg" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" name="ControllerValue7" type="MidiControlDeviceFilterDeviceParameter" />
+      <xs:element minOccurs="0" default="-1" name="ControllerNumber7" type="xs:int" />
+      <xs:element minOccurs="0" default="Untitled" name="ControllerName7" type="xs:string" />
+      <xs:element minOccurs="0" default="CC" name="ControllerType7">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="PB" />
+            <xs:enumeration value="CP" />
+            <xs:enumeration value="CC" />
+            <xs:enumeration value="Prg" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" name="ControllerValue8" type="MidiControlDeviceFilterDeviceParameter" />
+      <xs:element minOccurs="0" default="-1" name="ControllerNumber8" type="xs:int" />
+      <xs:element minOccurs="0" default="Untitled" name="ControllerName8" type="xs:string" />
+      <xs:element minOccurs="0" default="CC" name="ControllerType8">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="PB" />
+            <xs:enumeration value="CP" />
+            <xs:enumeration value="CC" />
+            <xs:enumeration value="Prg" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" name="ControllerValue9" type="MidiControlDeviceFilterDeviceParameter" />
+      <xs:element minOccurs="0" default="-1" name="ControllerNumber9" type="xs:int" />
+      <xs:element minOccurs="0" default="Untitled" name="ControllerName9" type="xs:string" />
+      <xs:element minOccurs="0" default="CC" name="ControllerType9">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="PB" />
+            <xs:enumeration value="CP" />
+            <xs:enumeration value="CC" />
+            <xs:enumeration value="Prg" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" name="ControllerValue10" type="MidiControlDeviceFilterDeviceParameter" />
+      <xs:element minOccurs="0" default="-1" name="ControllerNumber10" type="xs:int" />
+      <xs:element minOccurs="0" default="Untitled" name="ControllerName10" type="xs:string" />
+      <xs:element minOccurs="0" default="CC" name="ControllerType10">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="PB" />
+            <xs:enumeration value="CP" />
+            <xs:enumeration value="CC" />
+            <xs:enumeration value="Prg" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" name="ControllerValue11" type="MidiControlDeviceFilterDeviceParameter" />
+      <xs:element minOccurs="0" default="-1" name="ControllerNumber11" type="xs:int" />
+      <xs:element minOccurs="0" default="Untitled" name="ControllerName11" type="xs:string" />
+      <xs:element minOccurs="0" default="CC" name="ControllerType11">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="PB" />
+            <xs:enumeration value="CP" />
+            <xs:enumeration value="CC" />
+            <xs:enumeration value="Prg" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" name="ControllerValue12" type="MidiControlDeviceFilterDeviceParameter" />
+      <xs:element minOccurs="0" default="-1" name="ControllerNumber12" type="xs:int" />
+      <xs:element minOccurs="0" default="Untitled" name="ControllerName12" type="xs:string" />
+      <xs:element minOccurs="0" default="CC" name="ControllerType12">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="PB" />
+            <xs:enumeration value="CP" />
+            <xs:enumeration value="CC" />
+            <xs:enumeration value="Prg" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" name="ControllerValue13" type="MidiControlDeviceFilterDeviceParameter" />
+      <xs:element minOccurs="0" default="-1" name="ControllerNumber13" type="xs:int" />
+      <xs:element minOccurs="0" default="Untitled" name="ControllerName13" type="xs:string" />
+      <xs:element minOccurs="0" default="CC" name="ControllerType13">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="PB" />
+            <xs:enumeration value="CP" />
+            <xs:enumeration value="CC" />
+            <xs:enumeration value="Prg" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" default="0" name="LinkedInstrument" type="xs:int" />
+      <xs:element minOccurs="0" default="1" name="VisiblePages" type="xs:int" />
+    </xs:all>
+    <xs:attribute fixed="MidiControlDevice" name="type" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="MidiControlDeviceFilterDeviceParameter">
+    <xs:all>
+      <xs:element minOccurs="0" default="63.5" name="Value" type="xs:float" />
+      <xs:element minOccurs="0" default="Device only" name="Visualization">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="Dont Show" />
+            <xs:enumeration value="Device only" />
+            <xs:enumeration value="Mixer and Device" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" name="MidiMappings">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="MidiMapping" type="MidiMapping" />
+          </xs:sequence>
+          <xs:attribute name="type" type="xs:string" use="optional" />
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="type" type="xs:string" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="MixerEqDevice">
+    <xs:all>
+      <xs:element minOccurs="0" default="true" name="IsActive" type="xs:boolean" />
+      <xs:element minOccurs="0" default="false" name="IsSelected" type="xs:boolean" />
+      <xs:element minOccurs="0" default="Init" name="SelectedPresetName" type="xs:string" />
+      <xs:element minOccurs="0" default="false" name="SelectedPresetIsModified" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RunTimePresetA" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" name="RunTimePresetB" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" default="true" name="IsMaximized" type="xs:boolean" />
+      <xs:element minOccurs="0" default="L+R" name="InputMode">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="L" />
+            <xs:enumeration value="R" />
+            <xs:enumeration value="L+R" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" default="20" name="MaxVisualizedGain" type="xs:float" />
+      <xs:element minOccurs="0" name="LowGain" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="MidGain" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="MidFreq" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="MidQ" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="HiGain" type="FilterDeviceParameter" />
+    </xs:all>
+    <xs:attribute fixed="MixerEqDevice" name="type" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="PdcTestDelayDevice">
+    <xs:all>
+      <xs:element minOccurs="0" default="true" name="IsActive" type="xs:boolean" />
+      <xs:element minOccurs="0" default="false" name="IsSelected" type="xs:boolean" />
+      <xs:element minOccurs="0" default="Init" name="SelectedPresetName" type="xs:string" />
+      <xs:element minOccurs="0" default="false" name="SelectedPresetIsModified" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RunTimePresetA" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" name="RunTimePresetB" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" default="true" name="IsMaximized" type="xs:boolean" />
+      <xs:element minOccurs="0" name="DelayInMs" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="ReportLatency" type="FilterDeviceParameter" />
+    </xs:all>
+    <xs:attribute fixed="PdcTestDelayDevice" name="type" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="PhaserDevice">
+    <xs:all>
+      <xs:element minOccurs="0" default="true" name="IsActive" type="xs:boolean" />
+      <xs:element minOccurs="0" default="false" name="IsSelected" type="xs:boolean" />
+      <xs:element minOccurs="0" default="Init" name="SelectedPresetName" type="xs:string" />
+      <xs:element minOccurs="0" default="false" name="SelectedPresetIsModified" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RunTimePresetA" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" name="RunTimePresetB" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" default="true" name="IsMaximized" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Ceilling" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Floor" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="LFORate" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Depth" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Feedback" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Phase" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Stages" type="FilterDeviceParameter" />
+    </xs:all>
+    <xs:attribute fixed="PhaserDevice" name="type" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="Reverb2Device">
+    <xs:all>
+      <xs:element minOccurs="0" default="true" name="IsActive" type="xs:boolean" />
+      <xs:element minOccurs="0" default="false" name="IsSelected" type="xs:boolean" />
+      <xs:element minOccurs="0" default="Init" name="SelectedPresetName" type="xs:string" />
+      <xs:element minOccurs="0" default="false" name="SelectedPresetIsModified" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RunTimePresetA" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" name="RunTimePresetB" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" default="true" name="IsMaximized" type="xs:boolean" />
+      <xs:element minOccurs="0" default="1" name="QualitySetup" type="xs:int" />
+      <xs:element minOccurs="0" name="ReverbTime" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="LPFilter" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="PreDelay" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="DryMix" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Send" type="FilterDeviceParameter" />
+    </xs:all>
+    <xs:attribute fixed="Reverb2Device" name="type" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="Reverb3Device">
+    <xs:all>
+      <xs:element minOccurs="0" default="true" name="IsActive" type="xs:boolean" />
+      <xs:element minOccurs="0" default="false" name="IsSelected" type="xs:boolean" />
+      <xs:element minOccurs="0" default="Init" name="SelectedPresetName" type="xs:string" />
+      <xs:element minOccurs="0" default="false" name="SelectedPresetIsModified" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RunTimePresetA" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" name="RunTimePresetB" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" default="true" name="IsMaximized" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ReverbTime" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="PreDelay" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="LPFilter" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="LPGain" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Color" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Width" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Pan" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="WetMix" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="DryMix" type="FilterDeviceParameter" />
+    </xs:all>
+    <xs:attribute fixed="Reverb3Device" name="type" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="ReverbDevice">
+    <xs:all>
+      <xs:element minOccurs="0" default="true" name="IsActive" type="xs:boolean" />
+      <xs:element minOccurs="0" default="false" name="IsSelected" type="xs:boolean" />
+      <xs:element minOccurs="0" default="Init" name="SelectedPresetName" type="xs:string" />
+      <xs:element minOccurs="0" default="false" name="SelectedPresetIsModified" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RunTimePresetA" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" name="RunTimePresetB" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" default="true" name="IsMaximized" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Send" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="RoomSize" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Width" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Damp" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="DryMix" type="FilterDeviceParameter" />
+    </xs:all>
+    <xs:attribute fixed="ReverbDevice" name="type" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="RewireInDevice">
+    <xs:all>
+      <xs:element minOccurs="0" default="true" name="IsActive" type="xs:boolean" />
+      <xs:element minOccurs="0" default="false" name="IsSelected" type="xs:boolean" />
+      <xs:element minOccurs="0" default="Init" name="SelectedPresetName" type="xs:string" />
+      <xs:element minOccurs="0" default="false" name="SelectedPresetIsModified" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RunTimePresetA" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" name="RunTimePresetB" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" default="true" name="IsMaximized" type="xs:boolean" />
+      <xs:element minOccurs="0" name="DeviceName" type="xs:string" />
+      <xs:element minOccurs="0" default="0" name="ChannelIndex" type="xs:int" />
+      <xs:element minOccurs="0" default="L+R" name="ChannelMode">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="L" />
+            <xs:enumeration value="R" />
+            <xs:enumeration value="L+R" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" name="Panning" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Volume" type="FilterDeviceParameter" />
+    </xs:all>
+    <xs:attribute fixed="RewireInDevice" name="type" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="RingModDevice">
+    <xs:all>
+      <xs:element minOccurs="0" default="true" name="IsActive" type="xs:boolean" />
+      <xs:element minOccurs="0" default="false" name="IsSelected" type="xs:boolean" />
+      <xs:element minOccurs="0" default="Init" name="SelectedPresetName" type="xs:string" />
+      <xs:element minOccurs="0" default="false" name="SelectedPresetIsModified" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RunTimePresetA" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" name="RunTimePresetB" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" default="true" name="IsMaximized" type="xs:boolean" />
+      <xs:element minOccurs="0" name="OscillatorType" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Frequency" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Amount" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Phase" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Inertia" type="FilterDeviceParameter" />
+    </xs:all>
+    <xs:attribute fixed="RingModDevice" name="type" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="SendDevice">
+    <xs:all>
+      <xs:element minOccurs="0" default="true" name="IsActive" type="xs:boolean" />
+      <xs:element minOccurs="0" default="false" name="IsSelected" type="xs:boolean" />
+      <xs:element minOccurs="0" default="Init" name="SelectedPresetName" type="xs:string" />
+      <xs:element minOccurs="0" default="false" name="SelectedPresetIsModified" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RunTimePresetA" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" name="RunTimePresetB" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" default="true" name="IsMaximized" type="xs:boolean" />
+      <xs:element minOccurs="0" name="SendAmount" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="DestSendTrack" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" default="true" name="MuteSource" type="xs:boolean" />
+    </xs:all>
+    <xs:attribute fixed="SendDevice" name="type" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="SequencerMasterTrackDevice">
+    <xs:all>
+      <xs:element minOccurs="0" default="true" name="IsActive" type="xs:boolean" />
+      <xs:element minOccurs="0" default="false" name="IsSelected" type="xs:boolean" />
+      <xs:element minOccurs="0" default="Init" name="SelectedPresetName" type="xs:string" />
+      <xs:element minOccurs="0" default="false" name="SelectedPresetIsModified" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RunTimePresetA" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" name="RunTimePresetB" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" default="true" name="IsMaximized" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Panning" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Volume" type="VolumeFilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Surround" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="PostPanning" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="PostVolume" type="VolumeFilterDeviceParameter" />
+      <xs:element minOccurs="0" default="false" name="AutoDcCorrection" type="xs:boolean" />
+      <xs:element minOccurs="0" default="false" name="SoftClipping" type="xs:boolean" />
+      <xs:element minOccurs="0" default="false" name="AutoGain" type="xs:boolean" />
+    </xs:all>
+    <xs:attribute fixed="SequencerMasterTrackDevice" name="type" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="VolumeFilterDeviceParameter">
+    <xs:all>
+      <xs:element minOccurs="0" default="1.0" name="Value" type="xs:float" />
+      <xs:element minOccurs="0" default="Device only" name="Visualization">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="Dont Show" />
+            <xs:enumeration value="Device only" />
+            <xs:enumeration value="Mixer and Device" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" name="MidiMappings">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="MidiMapping" type="MidiMapping" />
+          </xs:sequence>
+          <xs:attribute name="type" type="xs:string" use="optional" />
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="type" type="xs:string" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="SequencerSendTrackDevice">
+    <xs:all>
+      <xs:element minOccurs="0" default="true" name="IsActive" type="xs:boolean" />
+      <xs:element minOccurs="0" default="false" name="IsSelected" type="xs:boolean" />
+      <xs:element minOccurs="0" default="Init" name="SelectedPresetName" type="xs:string" />
+      <xs:element minOccurs="0" default="false" name="SelectedPresetIsModified" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RunTimePresetA" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" name="RunTimePresetB" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" default="true" name="IsMaximized" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Panning" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Volume" type="VolumeFilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Surround" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="PostPanning" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="PostVolume" type="VolumeFilterDeviceParameter" />
+    </xs:all>
+    <xs:attribute fixed="SequencerSendTrackDevice" name="type" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="SequencerTrackDevice">
+    <xs:all>
+      <xs:element minOccurs="0" default="true" name="IsActive" type="xs:boolean" />
+      <xs:element minOccurs="0" default="false" name="IsSelected" type="xs:boolean" />
+      <xs:element minOccurs="0" default="Init" name="SelectedPresetName" type="xs:string" />
+      <xs:element minOccurs="0" default="false" name="SelectedPresetIsModified" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RunTimePresetA" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" name="RunTimePresetB" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" default="true" name="IsMaximized" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Panning" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Volume" type="VolumeFilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Surround" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="PostPanning" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="PostVolume" type="VolumeFilterDeviceParameter" />
+    </xs:all>
+    <xs:attribute fixed="SequencerTrackDevice" name="type" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="ShaperDevice">
+    <xs:all>
+      <xs:element minOccurs="0" default="true" name="IsActive" type="xs:boolean" />
+      <xs:element minOccurs="0" default="false" name="IsSelected" type="xs:boolean" />
+      <xs:element minOccurs="0" default="Init" name="SelectedPresetName" type="xs:string" />
+      <xs:element minOccurs="0" default="false" name="SelectedPresetIsModified" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RunTimePresetA" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" name="RunTimePresetB" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" default="true" name="IsMaximized" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Threshold" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Ratio" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Attack" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Release" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Gain" type="FilterDeviceParameter" />
+    </xs:all>
+    <xs:attribute fixed="ShaperDevice" name="type" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="SignalFollowerDevice">
+    <xs:all>
+      <xs:element minOccurs="0" default="true" name="IsActive" type="xs:boolean" />
+      <xs:element minOccurs="0" default="false" name="IsSelected" type="xs:boolean" />
+      <xs:element minOccurs="0" default="Init" name="SelectedPresetName" type="xs:string" />
+      <xs:element minOccurs="0" default="false" name="SelectedPresetIsModified" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RunTimePresetA" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" name="RunTimePresetB" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" default="true" name="IsMaximized" type="xs:boolean" />
+      <xs:element minOccurs="0" name="DestTrack" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="DestEffect" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="DestParameter" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="DestMin" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="DestMax" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="DestOffset" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Attack" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Release" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Sensitivity" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" default="Linear" name="DestScaling">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="Log Fast" />
+            <xs:enumeration value="Log Slow" />
+            <xs:enumeration value="Linear" />
+            <xs:enumeration value="Exp Slow" />
+            <xs:enumeration value="Exp Fast" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" name="LpFreq" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="HpFreq" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" default="L+R" name="InputMode">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="L" />
+            <xs:enumeration value="R" />
+            <xs:enumeration value="L+R" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" default="0.0" name="LookAhead" type="xs:float" />
+      <xs:element minOccurs="0" default="false" name="ListenToInput" type="xs:boolean" />
+    </xs:all>
+    <xs:attribute fixed="SignalFollowerDevice" name="type" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="StereoExpanderDevice">
+    <xs:all>
+      <xs:element minOccurs="0" default="true" name="IsActive" type="xs:boolean" />
+      <xs:element minOccurs="0" default="false" name="IsSelected" type="xs:boolean" />
+      <xs:element minOccurs="0" default="Init" name="SelectedPresetName" type="xs:string" />
+      <xs:element minOccurs="0" default="false" name="SelectedPresetIsModified" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RunTimePresetA" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" name="RunTimePresetB" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" default="true" name="IsMaximized" type="xs:boolean" />
+      <xs:element minOccurs="0" default="R" name="MonoMixMode">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="L" />
+            <xs:enumeration value="R" />
+            <xs:enumeration value="L+R" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" name="StereoWidth" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="SurroundWidth" type="FilterDeviceParameter" />
+    </xs:all>
+    <xs:attribute fixed="StereoExpanderDevice" name="type" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="StutterDevice">
+    <xs:all>
+      <xs:element minOccurs="0" default="true" name="IsActive" type="xs:boolean" />
+      <xs:element minOccurs="0" default="false" name="IsSelected" type="xs:boolean" />
+      <xs:element minOccurs="0" default="Init" name="SelectedPresetName" type="xs:string" />
+      <xs:element minOccurs="0" default="false" name="SelectedPresetIsModified" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RunTimePresetA" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" name="RunTimePresetB" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" default="true" name="IsMaximized" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Divisor" type="StutterDivisorDeviceParameter" />
+      <xs:element minOccurs="0" name="Buffer" type="StutterBufferDeviceParameter" />
+      <xs:element minOccurs="0" name="Wet" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Dry" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Mode" type="FilterDeviceParameter" />
+    </xs:all>
+    <xs:attribute fixed="StutterDevice" name="type" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="StutterDivisorDeviceParameter">
+    <xs:all>
+      <xs:element minOccurs="0" default="1.0" name="Value" type="xs:float" />
+      <xs:element minOccurs="0" default="Mixer and Device" name="Visualization">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="Dont Show" />
+            <xs:enumeration value="Device only" />
+            <xs:enumeration value="Mixer and Device" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" name="MidiMappings">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="MidiMapping" type="MidiMapping" />
+          </xs:sequence>
+          <xs:attribute name="type" type="xs:string" use="optional" />
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="type" type="xs:string" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="StutterBufferDeviceParameter">
+    <xs:all>
+      <xs:element minOccurs="0" default="0.5" name="Value" type="xs:float" />
+      <xs:element minOccurs="0" default="Device only" name="Visualization">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="Dont Show" />
+            <xs:enumeration value="Device only" />
+            <xs:enumeration value="Mixer and Device" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" name="MidiMappings">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="MidiMapping" type="MidiMapping" />
+          </xs:sequence>
+          <xs:attribute name="type" type="xs:string" use="optional" />
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="type" type="xs:string" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="VelocityDevice">
+    <xs:all>
+      <xs:element minOccurs="0" default="true" name="IsActive" type="xs:boolean" />
+      <xs:element minOccurs="0" default="false" name="IsSelected" type="xs:boolean" />
+      <xs:element minOccurs="0" default="Init" name="SelectedPresetName" type="xs:string" />
+      <xs:element minOccurs="0" default="false" name="SelectedPresetIsModified" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RunTimePresetA" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" name="RunTimePresetB" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" default="true" name="IsMaximized" type="xs:boolean" />
+      <xs:element minOccurs="0" default="-1" name="SrcInstrument" type="xs:int" />
+      <xs:element minOccurs="0" default="Log Slow" name="DestScaling">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="Log Fast" />
+            <xs:enumeration value="Log Slow" />
+            <xs:enumeration value="Linear" />
+            <xs:enumeration value="Exp Slow" />
+            <xs:enumeration value="Exp Fast" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" default="0" name="VelocityMin" type="xs:int" />
+      <xs:element minOccurs="0" default="127" name="VelocityMax" type="xs:int" />
+      <xs:element minOccurs="0" name="DestTrack" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="DestEffect" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="DestParameter" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="DestMin" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="DestMax" type="FilterDeviceParameter" />
+    </xs:all>
+    <xs:attribute fixed="VelocityDevice" name="type" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="XYPadDevice">
+    <xs:all>
+      <xs:element minOccurs="0" default="true" name="IsActive" type="xs:boolean" />
+      <xs:element minOccurs="0" default="false" name="IsSelected" type="xs:boolean" />
+      <xs:element minOccurs="0" default="Init" name="SelectedPresetName" type="xs:string" />
+      <xs:element minOccurs="0" default="false" name="SelectedPresetIsModified" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RunTimePresetA" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" name="RunTimePresetB" type="FilterDevicePreset" />
+      <xs:element minOccurs="0" default="true" name="IsMaximized" type="xs:boolean" />
+      <xs:element minOccurs="0" default="true" name="SlidersVisible" type="xs:boolean" />
+      <xs:element minOccurs="0" default="false" name="ResetOnRelease" type="xs:boolean" />
+      <xs:element minOccurs="0" default="0.5" name="ResetSnapBackValueX" type="xs:float" />
+      <xs:element minOccurs="0" default="0.5" name="ResetSnapBackValueY" type="xs:float" />
+      <xs:element minOccurs="0" name="ValueX" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="ValueY" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Out1DestTrack" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Out1DestEffect" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Out1DestParameter" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Out1Min" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Out1Max" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" default="Linear" name="Out1Scaling">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="Log Fast" />
+            <xs:enumeration value="Log Slow" />
+            <xs:enumeration value="Linear" />
+            <xs:enumeration value="Exp Slow" />
+            <xs:enumeration value="Exp Fast" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" name="Out2DestTrack" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Out2DestEffect" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Out2DestParameter" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Out2Min" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" name="Out2Max" type="FilterDeviceParameter" />
+      <xs:element minOccurs="0" default="Linear" name="Out2Scaling">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="Log Fast" />
+            <xs:enumeration value="Log Slow" />
+            <xs:enumeration value="Linear" />
+            <xs:enumeration value="Exp Slow" />
+            <xs:enumeration value="Exp Fast" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute fixed="XYPadDevice" name="type" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="SequencerMasterTrack">
+    <xs:all>
+      <xs:element minOccurs="0" default="Mst" name="Name" type="xs:string" />
+      <xs:element minOccurs="0" default="220,220,220" name="Color" type="xs:string" />
+      <xs:element minOccurs="0" default="Active" name="State">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="Active" />
+            <xs:enumeration value="Off" />
+            <xs:enumeration value="Mute" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" name="NoteColumnStates">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" default="Active" name="NoteColumnState">
+              <xs:simpleType>
+                <xs:restriction base="xs:string">
+                  <xs:enumeration value="Active" />
+                  <xs:enumeration value="Off" />
+                  <xs:enumeration value="Mute" />
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" default="0" name="NumberOfVisibleNoteColumns" type="xs:int" />
+      <xs:element minOccurs="0" default="1" name="NumberOfVisibleEffectColumns" type="xs:int" />
+      <xs:element minOccurs="0" default="false" name="VolumeColumnIsVisible" type="xs:boolean" />
+      <xs:element minOccurs="0" default="false" name="PanningColumnIsVisible" type="xs:boolean" />
+      <xs:element minOccurs="0" default="false" name="DelayColumnIsVisible" type="xs:boolean" />
+      <xs:element minOccurs="0" default="0" name="TrackRouting" type="xs:int" />
+      <xs:element minOccurs="0" default="0.0" name="TrackDelay" type="xs:float" />
+      <xs:element minOccurs="0" name="FilterDevices" type="SequencerTrackDeviceChain" />
+    </xs:all>
+    <xs:attribute fixed="SequencerMasterTrack" name="type" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="SequencerSendTrack">
+    <xs:all>
+      <xs:element minOccurs="0" default="S01" name="Name" type="xs:string" />
+      <xs:element minOccurs="0" default="133,133,168" name="Color" type="xs:string" />
+      <xs:element minOccurs="0" default="Active" name="State">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="Active" />
+            <xs:enumeration value="Off" />
+            <xs:enumeration value="Mute" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" name="NoteColumnStates">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" default="Active" name="NoteColumnState">
+              <xs:simpleType>
+                <xs:restriction base="xs:string">
+                  <xs:enumeration value="Active" />
+                  <xs:enumeration value="Off" />
+                  <xs:enumeration value="Mute" />
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" default="0" name="NumberOfVisibleNoteColumns" type="xs:int" />
+      <xs:element minOccurs="0" default="1" name="NumberOfVisibleEffectColumns" type="xs:int" />
+      <xs:element minOccurs="0" default="false" name="VolumeColumnIsVisible" type="xs:boolean" />
+      <xs:element minOccurs="0" default="false" name="PanningColumnIsVisible" type="xs:boolean" />
+      <xs:element minOccurs="0" default="false" name="DelayColumnIsVisible" type="xs:boolean" />
+      <xs:element minOccurs="0" default="0" name="TrackRouting" type="xs:int" />
+      <xs:element minOccurs="0" default="0.0" name="TrackDelay" type="xs:float" />
+      <xs:element minOccurs="0" name="FilterDevices" type="SequencerTrackDeviceChain" />
+    </xs:all>
+    <xs:attribute fixed="SequencerSendTrack" name="type" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="PatternPool">
+    <xs:all>
+      <xs:element minOccurs="0" default="0" name="HighliteStep" type="xs:int" />
+      <xs:element minOccurs="0" default="64" name="DefaultPatternLength" type="xs:int" />
+      <xs:element minOccurs="0" name="Patterns">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="Pattern" type="Pattern" />
+          </xs:sequence>
+          <xs:attribute name="type" type="xs:string" use="optional" />
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="type" type="xs:string" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="Pattern">
+    <xs:all>
+      <xs:element minOccurs="0" name="Name" type="xs:string" />
+      <xs:element minOccurs="0" default="64" name="NumberOfLines" type="xs:int" />
+      <xs:element minOccurs="0" name="Tracks">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="PatternTrack" type="PatternTrack" />
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="PatternMasterTrack" type="PatternMasterTrack" />
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="PatternSendTrack" type="PatternSendTrack" />
+          </xs:sequence>
+          <xs:attribute name="type" type="xs:string" use="optional" />
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="type" type="xs:string" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="PatternTrack">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Track">
+        <xs:attribute fixed="PatternTrack" name="type" type="xs:string" use="required" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="PatternTrackAutomation">
+    <xs:all>
+      <xs:element minOccurs="0" name="Envelopes">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="Envelope" type="PatternTrackEnvelope" />
+          </xs:sequence>
+          <xs:attribute name="type" type="xs:string" use="optional" />
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="type" type="xs:string" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="PatternTrackEnvelope">
+    <xs:all>
+      <xs:element minOccurs="0" default="-1" name="DeviceIndex" type="xs:int" />
+      <xs:element minOccurs="0" default="-1" name="ParameterIndex" type="xs:int" />
+      <xs:element minOccurs="0" name="Envelope" type="Envelope" />
+    </xs:all>
+    <xs:attribute name="type" type="xs:string" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="PatternTrackLine">
+    <xs:all>
+      <xs:element minOccurs="0" name="NoteColumns">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="NoteColumn" type="PatternTrackNoteColumn" />
+          </xs:sequence>
+          <xs:attribute name="type" type="xs:string" use="optional" />
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="EffectColumns">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="EffectColumn" type="PatternTrackEffectColumn" />
+          </xs:sequence>
+          <xs:attribute name="type" type="xs:string" use="optional" />
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="index" type="xs:int" use="required" />
+    <xs:attribute name="type" type="xs:string" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="PatternTrackNoteColumn">
+    <xs:all>
+      <xs:element minOccurs="0" name="Note" type="xs:string" />
+      <xs:element minOccurs="0" name="Instrument" type="xs:string" />
+      <xs:element minOccurs="0" name="Volume" type="xs:string" />
+      <xs:element minOccurs="0" name="Panning" type="xs:string" />
+      <xs:element minOccurs="0" name="Delay" type="xs:string" />
+    </xs:all>
+    <xs:attribute name="type" type="xs:string" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="PatternTrackEffectColumn">
+    <xs:all>
+      <xs:element minOccurs="0" default="00" name="Value" type="xs:string" />
+      <xs:element minOccurs="0" default="00" name="Number" type="xs:string" />
+    </xs:all>
+    <xs:attribute name="type" type="xs:string" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="PatternMasterTrack">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Track">
+        <xs:attribute fixed="PatternMasterTrack" name="type" type="xs:string" use="required" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="PatternSendTrack">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Track">
+        <xs:attribute fixed="PatternSendTrack" name="type" type="xs:string" use="required" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="PatternSequence">
+    <xs:all>
+      <xs:element minOccurs="0" name="SequenceEntries">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="SequenceEntry" type="PatternSequenceEntry" />
+          </xs:sequence>
+          <xs:attribute name="type" type="xs:string" use="optional" />
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="LoopSelection" type="PatternSequenceSelection" />
+      <xs:element minOccurs="0" default="0" name="PatternNameWidth" type="xs:int" />
+      <xs:element minOccurs="0" default="248" name="PatternMatrixWidth" type="xs:int" />
+      <xs:element minOccurs="0" default="30" name="PatternSlotHeight" type="xs:int" />
+      <xs:element minOccurs="0" default="24" name="PatternSlotWidth" type="xs:int" />
+      <xs:element minOccurs="0" default="2" name="HighliteStep" type="xs:int" />
+      <xs:element minOccurs="0" default="0" name="HighliteOffset" type="xs:int" />
+    </xs:all>
+    <xs:attribute name="type" type="xs:string" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="PatternSequenceEntry">
+    <xs:all>
+      <xs:element minOccurs="0" default="0" name="Pattern" type="xs:int" />
+      <xs:element minOccurs="0" name="MutedTracks">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" default="0" name="MutedTrack" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="type" type="xs:string" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="PatternSequenceSelection">
+    <xs:all>
+      <xs:element minOccurs="0" default="-1" name="CursorPos" type="xs:int" />
+      <xs:element minOccurs="0" default="-1" name="RangePos" type="xs:int" />
+    </xs:all>
+    <xs:attribute name="type" type="xs:string" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="Track" abstract="true">
+    <xs:all>
+      <xs:element minOccurs="0" default="false" name="ColorEnabled" type="xs:boolean" />
+      <xs:element minOccurs="0" default="0,0,0" name="Color" type="xs:string" />
+      <xs:element minOccurs="0" name="Automations" type="PatternTrackAutomation" />
+      <xs:element minOccurs="0" name="Lines">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="Line" type="PatternTrackLine" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+  </xs:complexType>
+</xs:schema>
