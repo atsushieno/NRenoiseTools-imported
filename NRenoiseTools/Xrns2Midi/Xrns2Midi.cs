@@ -135,15 +135,15 @@ namespace NRenoiseTools.Xrns2MidiApp
                                              Instrument instrument = Song.Instruments.Instrument[instrumentIndex];
 
                                              // If midi instrument, then take the affected channel and patch
-                                             if (instrument.MidiProperties.IsActive)
+                                             if (instrument.MidiOutputProperties.IsActive)
                                              {
 
-                                                 midiInstrument.channel = instrument.MidiProperties.Channel;
-                                                 midiInstrument.patch = instrument.MidiProperties.Program;
+                                                 midiInstrument.channel = instrument.MidiOutputProperties.Channel;
+                                                 midiInstrument.patch = instrument.MidiOutputProperties.Program;
                                                  Log.WriteLine("\tInstrument Midi N°{0} is affected to channel {1}", instrumentIndex, midiInstrument.channel);
 
                                                  // Don't know why there is an octave shift on BaseNote for Midi instruments?
-                                                 midiInstrument.shiftBaseNote = instrument.MidiProperties.BaseNote -
+                                                 midiInstrument.shiftBaseNote = instrument.MidiOutputProperties.Transpose -
                                                                                 NoteHelper.ConvertToNumber("C-4") - 12;
                                                  if (midiInstrument.channel > 0)
                                                  {
@@ -157,7 +157,7 @@ namespace NRenoiseTools.Xrns2MidiApp
                                                  midiInstrument.channel = -1;
                                                  midiInstrument.patch = 0;
                                                  // TODO: How to select BaseNote on samples?
-                                                 midiInstrument.shiftBaseNote = instrument.PluginProperties.BaseNote -
+                                                 midiInstrument.shiftBaseNote = instrument.PluginProperties.Transpose -
                                                                                 NoteHelper.ConvertToNumber("C-4");
                                              }
                                          }

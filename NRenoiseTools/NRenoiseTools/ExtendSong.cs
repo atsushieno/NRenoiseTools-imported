@@ -47,7 +47,8 @@ namespace NRenoiseTools
             SelectedInstrumentIndex = 0;
             SelectedSampleIndex = 0;
             SelectedTrackIndex = 0;
-            doc_version = 21;            
+            LastSoloedOutMode = RenoiseSongLastSoloedOutMode.Active;
+            doc_version = 30;
         }
 
         /// <summary>

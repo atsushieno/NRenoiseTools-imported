@@ -70,10 +70,10 @@ namespace NRenoiseTools
         private int lineIndex;
         private int lineIndexInTrack;
         private int lineIndexInSong;
-        private PatternTrackLine line;
+        private PatternTrackLineNode line;
         private int columnIndex;
-        private PatternTrackNoteColumn noteColumn;
-        private PatternTrackEffectColumn effectColumn;
+        private PatternTrackNoteColumnNode noteColumn;
+        private PatternTrackEffectColumnNode effectColumn;
 
         private Stack<SongIterator> stateStackList;
 
@@ -157,7 +157,7 @@ namespace NRenoiseTools
         /// Gets the current line.
         /// </summary>
         /// <value>The line.</value>
-        public PatternTrackLine Line
+        public PatternTrackLineNode Line
         {
             get { return line; }
         }
@@ -175,7 +175,7 @@ namespace NRenoiseTools
         /// Gets the current note column.
         /// </summary>
         /// <value>The note column.</value>
-        public PatternTrackNoteColumn NoteColumn
+        public PatternTrackNoteColumnNode NoteColumn
         {
             get { return noteColumn; }
         }
@@ -184,7 +184,7 @@ namespace NRenoiseTools
         /// Gets the current effect column.
         /// </summary>
         /// <value>The effect column.</value>
-        public PatternTrackEffectColumn EffectColumn
+        public PatternTrackEffectColumnNode EffectColumn
         {
             get { return effectColumn; }
         }

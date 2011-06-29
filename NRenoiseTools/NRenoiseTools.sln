@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xrns2Midi", "Xrns2Midi\Xrns2Midi.csproj", "{B24C1E4C-5AB4-445B-B5B8-DCFEA1FF55A0}"
 	ProjectSection(ProjectDependencies) = postProject
 		{61C514D6-1D5F-4AA7-BF91-7B11296BD4EA} = {61C514D6-1D5F-4AA7-BF91-7B11296BD4EA}

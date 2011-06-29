@@ -34,8 +34,9 @@ namespace NRenoiseTools
         /// </summary>
         public RenoiseInstrument()
         {
+            ActiveGeneratorTab = RenoiseInstrumentActiveGeneratorTab.Plugin;
             CopyIntoNewSampleNameCounter = 0;
-            CopyIntoNewInstrumentNameCounter = 0;            
+            CopyIntoNewInstrumentNameCounter = 0;
         }
 
         /// <summary>
